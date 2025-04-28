@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sign Up - Wellness Tracker</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='stylessignup.css') }}">
+</head>
+<body>
+  <header>
+    <a href="index.html" class="logo-link">
+      <img src="https://static.vecteezy.com/system/resources/previews/013/547/909/non_2x/smartwatch-logo-design-watch-combine-with-bulb-logo-design-modern-concept-vector.jpg" 
+           alt="Wellness Tracker Logo" class="logo">
+    </a>
+    <h1>Wellness Tracker</h1>
+    <div class="nav-buttons">
+      <a href="index.html"><button>Home Page</button></a>
+      <a href="upload.html"><button>Upload</button></a>
+      <a href="faqs.html"><button>FAQ's</button></a>
+      <a href="history.html"><button>History</button></a>
+    </div>
+  </header>
+
+  <main class="signup-container">
+    <h2>Create Your Account</h2>
+    <form class="signup-form" action="account.html" method="POST" enctype="multipart/form-data">
+      <div class="form-row">
+        <label for="fullname">Full Name</label>
+        <input type="text" id="fullname" name="fullname" required />
+      </div>
+      
+      <div class="form-row">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" required />
+      </div>
+
+      <div class="form-row">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required />
+      </div>
+
+      <div class="form-row">
+        <label for="phone">Phone (+61)</label>
+        <input type="tel" id="phone" name="phone" pattern="\d{10}" placeholder="04 123 456 789" required />
+      </div>
+
+      <div class="form-row">
+        <label for="address">Address</label>
+        <input type="text" id="address" name="address" required />
+      </div>
+
+      <div class="form-row">
+        <label for="profilePhoto">Profile Photo</label>
+        <input type="file" id="profilePhoto" name="profilePhoto" accept="image/*" />
+      </div>
+
+      <div class="form-row">
+        <label for="age">Age</label>
+        <input type="number" id="age" name="age" min="1" max="120" required />
+      </div>
+
+      <div class="form-row">
+        <label for="height">Height (cm)</label>
+        <input type="number" id="height" name="height" required />
+      </div>
+
+      <div class="form-row">
+        <label for="weight">Weight (kg)</label>
+        <input type="number" id="weight" name="weight" required />
+      </div>
+
+      <div class="form-row">
+        <label for="gender">Gender</label>
+        <select id="gender" name="gender" required>
+          <option value="" disabled selected>Select Gender</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+
+      <!-- CAPTCHA Section -->
+      <div class="captcha-section">
+        <label for="captcha-input">Enter the CAPTCHA: <span id="captcha-text"></span></label>
+        <input type="text" id="captcha-input" name="captcha-input" required />
+      </div>
+
+      <button type="submit">Sign Up</button>
+    </form>
+  </main>
+
+  <script src="account.js"></script>
+</body>
+</html>
