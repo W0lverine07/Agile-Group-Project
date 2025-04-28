@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Upload Daily Fitness Data</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='stylesupload.css') }}">
+</head>
+<body>
+  <header>
+    <a href="index.html" class="logo-link">
+      <img src="https://static.vecteezy.com/system/resources/previews/013/547/909/non_2x/smartwatch-logo-design-watch-combine-with-bulb-logo-design-modern-concept-vector.jpg" 
+           alt="Wellness Tracker Logo" class="logo">
+    </a>
+    <h1>Wellness Tracker</h1>
+    <div class="nav-buttons">
+      <a href="index.html"><button>Home Page</button></a>
+      <a href="account.html"><button>Account</button></a>
+      <a href="faqs.html"><button>FAQ's</button></a>
+      <a href="history.html"><button>History</button></a>
+    </div>
+  </header>
+
+  <main class="content">
+    <h2>Upload Your Daily Fitness Data</h2>
+    <form action="visualize.html" method="GET">
+        <label for="steps">Steps Taken:</label>
+        <input type="number" id="steps" name="steps" ><br><br>
+
+        <label for="distance">Distance Covered (km):</label>
+        <input type="number" step="0.01" id="distance" name="distance" required><br><br>
+
+        <label for="duration">Time Spent On Activity (minutes):</label>
+        <input type="number" id="duration" name="duration" required><br><br>
+
+        <label for="heartRate">Average Heart Rate (bpm):</label>
+        <input type="number" id="heartRate" name="heartRate" ><br><br>
+
+        <label for="calories">Calories Burnt:</label>
+        <input type="number" id="calories" name="calories" ><br><br>
+
+        <label for="sleep">Hours of Sleep:</label>
+        <input type="number" step="0.1" id="sleep" name="sleep" ><br><br>
+
+        <label for="activity">Activity Type:</label>
+        <select id="activity" name="activity" required>
+          <option value="">--Select--</option>
+          <option value="walking">Walking</option>
+          <option value="running">Running</option>
+          <option value="gym">Gym</option>
+          <option value="cycling">Cycling</option>
+          <option value="swimming">Swimming</option>
+          <option value="sports">Sports</option>
+        </select><br><br>
+
+        <button type="submit">Submit Data</button>
+    </form>
+  </main>
+</body>
+</html>
