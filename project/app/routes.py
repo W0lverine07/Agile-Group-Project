@@ -84,3 +84,4 @@ def faqs():
 @main.route('/history')
 def history():
     return "<h1>History Page Placeholder</h1>"
+
