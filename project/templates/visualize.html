@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualize Data</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles_visualize.css') }}">
+</head>
+<body>
+  <header>
+    <a href="index.html" class="logo-link">
+      <img src="https://static.vecteezy.com/system/resources/previews/013/547/909/non_2x/smartwatch-logo-design-watch-combine-with-bulb-logo-design-modern-concept-vector.jpg" 
+           alt="Wellness Tracker Logo" class="logo">
+    </a>
+    <h1>Wellness Tracker</h1>
+    <div class="nav-buttons">
+      <a href="{{ url_for('home') }}">
+            <button>Home Page</button>
+        </a>
+        <a href="{{ url_for('account') }}">
+            <button>Account</button>
+        </a>
+        <a href="{{ url_for('faqs') }}">
+            <button>FAQ's</button>
+        </a>
+        <a href="{{ url_for('history') }}">
+            <button>History</button>
+        </a>
+    </div>
+  </header>
+
+  <main class="content">
+    <h2>Visualize Your Data</h2>
+    <canvas id="myChart" width="400" height="200"></canvas>
+
+    <h3>Data Table</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Steps</th>
+          <th>Calories Burnt</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>5000</td>
+          <td>300</td>
+        </tr>
+        <tr>
+          <td>6000</td>
+          <td>350</td>
+        </tr>
+      </tbody>
+    </table>
+  </main>
+
+  <script>
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['Day 1', 'Day 2'],
+            datasets: [{
+                label: 'Calories Burnt',
+                data: [300, 350],
+                borderColor: '#ff0000',
+                fill: false
+            }]
+        }
+    });
+  </script>
+</body>
+</html>
