@@ -69,6 +69,7 @@ body::after {
   font-weight: 700;
   background: linear-gradient(90deg, #ff4d4d, #ff9c9c);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
@@ -184,6 +185,7 @@ h1 {
   margin-bottom: 0.5rem;
   background: linear-gradient(90deg, #fff, #ccc);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
