@@ -62,15 +62,15 @@ def account():
 
 @main.route('/upload')
 def upload():
-    return "<h1>Upload Page Placeholder</h1>"
+    return render_template('upload.html')
 
 @main.route('/visualize')
 def visualize():
-    return "<h1>Visualize Page Placeholder</h1>"
+    return render_template('visualize.html')
 
 @main.route('/share_page')
 def share_page():
-    return "<h1>Share Page Placeholder</h1>"
+    return render_template('share_page.html')
 
 
 @main.route('/health_data', methods=['POST'])
@@ -79,9 +79,9 @@ def health_data():
 
 @main.route('/faqs')
 def faqs():
-    return "<h1>FAQs Page Placeholder</h1>"
+    return render_template('faqs.html')
 
 @main.route('/history')
 def history():
-    return "<h1>History Page Placeholder</h1>"
+    return render_template('history.html')
 

@@ -15,16 +15,13 @@
     </a>
     <h1>Wellness Tracker</h1>
     <div class="nav-buttons">
-      <a href="{{ url_for('home') }}">
-            <button>Home Page</button>
-        </a>
-        <a href="{{ url_for('account') }}">
+        <a href="{{ url_for('main.account') }}">
             <button>Account</button>
         </a>
-        <a href="{{ url_for('faqs') }}">
+        <a href="{{ url_for('main.faqs') }}">
             <button>FAQ's</button>
         </a>
-        <a href="{{ url_for('history') }}">
+        <a href="{{ url_for('main.history') }}">
             <button>History</button>
         </a>
     </div>

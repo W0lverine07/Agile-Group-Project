@@ -6,34 +6,34 @@
     <title>Health Data</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles_health_data.css') }}">
     <script>
-<!--        // Function to show the share prompt-->
-<!--        function shareData() {-->
-<!--            // Create the share prompt HTML-->
-<!--            const sharePromptHTML = `-->
-<!--                <div class="share-prompt">-->
-<!--                    <h3>Share Your Data</h3>-->
-<!--                    <p>Click a link to share your data on social media:</p>-->
-<!--                    <a href="https://twitter.com/intent/tweet?text=Check%20out%20my%20health%20data!" target="_blank">-->
-<!--                        <button>Share on Twitter</button>-->
-<!--                    </a>-->
-<!--                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://yourwebsite.com/visualize.html" target="_blank">-->
-<!--                        <button>Share on Facebook</button>-->
-<!--                    </a>-->
-<!--                    <button onclick="closeSharePrompt()">Close</button>-->
-<!--                </div>-->
-<!--            `;-->
+// <!--        // Function to show the share prompt-->
+// <!--        function shareData() {-->
+// <!--            // Create the share prompt HTML-->
+// <!--            const sharePromptHTML = `-->
+// <!--                <div class="share-prompt">-->
+// <!--                    <h3>Share Your Data</h3>-->
+// <!--                    <p>Click a link to share your data on social media:</p>-->
+// <!--                    <a href="https://twitter.com/intent/tweet?text=Check%20out%20my%20health%20data!" target="_blank">-->
+// <!--                        <button>Share on Twitter</button>-->
+// <!--                    </a>-->
+// <!--                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://yourwebsite.com/visualize.html" target="_blank">-->
+// <!--                        <button>Share on Facebook</button>-->
+// <!--                    </a>-->
+// <!--                    <button onclick="closeSharePrompt()">Close</button>-->
+// <!--                </div>-->
+// <!--            `;-->
 
-<!--            // Append the prompt to the body-->
-<!--            document.body.insertAdjacentHTML('beforeend', sharePromptHTML);-->
-<!--        }-->
+// <!--            // Append the prompt to the body-->
+// <!--            document.body.insertAdjacentHTML('beforeend', sharePromptHTML);-->
+// <!--        }-->
 
-<!--        // Function to close the share prompt-->
-<!--        function closeSharePrompt() {-->
-<!--            const prompt = document.querySelector('.share-prompt');-->
-<!--            if (prompt) {-->
-<!--                prompt.remove();-->
-<!--            }-->
-<!--        }-->
+// <!--        // Function to close the share prompt-->
+// <!--        function closeSharePrompt() {-->
+// <!--            const prompt = document.querySelector('.share-prompt');-->
+// <!--            if (prompt) {-->
+// <!--                prompt.remove();-->
+// <!--            }-->
+// <!--        }-->
     </script>
 </head>
 <body>
@@ -44,9 +44,6 @@
     </a>
     <h1>Wellness Tracker</h1>
     <div class="nav-buttons">
-      <a href="{{ url_for('main.home') }}">
-            <button>Home Page</button>
-        </a>
         <a href="{{ url_for('main.account') }}">
             <button>Account</button>
         </a>
@@ -76,7 +73,7 @@
         </a>
 
         <!-- Share button (triggers the share prompt) -->
-        <a href="{{ url_for('main.share_page') }}" class="option" onclick="shareData()">
+        <a href="{{ url_for('main.share_page') }}" class="option" >
             <img src="https://img.icons8.com/clouds/300/share.png" alt="Share Data" />
             <p>Share Data</p>
         </a>
