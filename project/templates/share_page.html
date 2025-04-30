@@ -9,22 +9,22 @@
 </head>
 <body>
   <header>
-    <a href="index.html" class="logo-link">
+    <a href="{{url_for('main.home')}}" class="logo-link">
       <img src="https://static.vecteezy.com/system/resources/previews/013/547/909/non_2x/smartwatch-logo-design-watch-combine-with-bulb-logo-design-modern-concept-vector.jpg" 
            alt="Wellness Tracker Logo" class="logo">
     </a>
     <h1>Wellness Tracker</h1>
     <div class="nav-buttons">
-      <a href="{{ url_for('home') }}">
-            <button>Home Page</button>
+      <a href="{{ url_for('main.home') }}">
+            <button>Log out</button>
         </a>
-        <a href="{{ url_for('account') }}">
-            <button>Account</button>
+        <a href="{{ url_for('main.account') }}">
+            <button>Profile</button>
         </a>
-        <a href="{{ url_for('faqs') }}">
+        <a href="{{ url_for('main.faqs') }}">
             <button>FAQ's</button>
         </a>
-        <a href="{{ url_for('history') }}">
+        <a href="{{ url_for('main.history') }}">
             <button>History</button>
         </a>
     </div>
@@ -49,7 +49,7 @@
             <!-- Activity items to share -->
             <div class="share-item" onclick="selectItem('activity', 1)">
               <div class="item-icon">
-                <img src="https://img.icons8.com/clouds/100/running.png" alt="Running">
+                <img src="https://cdn-icons-png.flaticon.com/512/384/384276.png" alt="Running">
               </div>
               <div class="item-details">
                 <h4>Morning Run</h4>
@@ -60,7 +60,7 @@
             
             <div class="share-item" onclick="selectItem('activity', 2)">
               <div class="item-icon">
-                <img src="https://img.icons8.com/clouds/100/cycling.png" alt="Cycling">
+                <img src="https://cdn-icons-png.flaticon.com/512/2972/2972185.png" alt="Cycling">
               </div>
               <div class="item-details">
                 <h4>Evening Ride</h4>
@@ -71,10 +71,10 @@
             
             <div class="share-item" onclick="selectItem('activity', 3)">
               <div class="item-icon">
-                <img src="https://img.icons8.com/clouds/100/swimming.png" alt="Swimming">
+                <img src="../static/image/swimming.png" alt="Swimming">
               </div>
               <div class="item-details">
-                <h4>Pool Workout</h4>
+                <h4>Swimming</h4>
                 <p>1.5 km • 30 min • 250 calories</p>
                 <p class="item-date">April 18, 2025</p>
               </div>
@@ -87,7 +87,7 @@
             <!-- Achievement items to share -->
             <div class="share-item" onclick="selectItem('achievement', 1)">
               <div class="item-icon achievement">
-                <img src="https://img.icons8.com/clouds/100/medal.png" alt="First Run">
+                <img src="https://cdn-icons-png.flaticon.com/512/2583/2583344.png" alt="First Run">
               </div>
               <div class="item-details">
                 <h4>First Run</h4>
@@ -98,7 +98,7 @@
             
             <div class="share-item" onclick="selectItem('achievement', 2)">
               <div class="item-icon achievement">
-                <img src="https://img.icons8.com/clouds/100/trophy.png" alt="Marathon Master">
+                <img src="https://cdn-icons-png.flaticon.com/512/6941/6941697.png" alt="Marathon Master">
               </div>
               <div class="item-details">
                 <h4>Marathon Master</h4>
@@ -114,7 +114,7 @@
             <!-- Stats to share -->
             <div class="share-item" onclick="selectItem('stats', 'weekly')">
               <div class="item-icon stats">
-                <img src="https://img.icons8.com/clouds/100/area-chart.png" alt="Weekly Stats">
+                <img src="../static/image/scheme.png" alt="Weekly Stats">
               </div>
               <div class="item-details">
                 <h4>Weekly Activity Summary</h4>
@@ -124,7 +124,7 @@
             
             <div class="share-item" onclick="selectItem('stats', 'monthly')">
               <div class="item-icon stats">
-                <img src="https://img.icons8.com/clouds/100/combo-chart.png" alt="Monthly Stats">
+                <img src="https://cdn-icons-png.flaticon.com/512/1170/1170577.png" alt="Monthly Stats">
               </div>
               <div class="item-details">
                 <h4>Monthly Progress</h4>
@@ -193,7 +193,7 @@
           </div>
           <div class="shared-content">
             <div class="shared-item-icon">
-              <img src="https://img.icons8.com/clouds/100/hiking.png" alt="Hiking">
+              <img src="https://cdn-icons-png.flaticon.com/512/3198/3198336.png" alt="Hiking">
             </div>
             <div class="shared-item-details">
               <h4>Weekend Hike</h4>
@@ -213,7 +213,7 @@
           </div>
           <div class="shared-content">
             <div class="shared-item-icon achievement">
-              <img src="https://img.icons8.com/clouds/100/medal2.png" alt="Cycling Pro">
+              <img src="https://cdn-icons-png.flaticon.com/512/9404/9404806.png" alt="Cycling Pro">
             </div>
             <div class="shared-item-details">
               <h4>Cycling Pro</h4>
@@ -229,7 +229,7 @@
   <!-- Success notification -->
   <div id="success-notification" class="notification">
     <div class="notification-content">
-      <img src="https://img.icons8.com/clouds/100/checkmark.png" alt="Success">
+      <img src="https://cdn-icons-png.flaticon.com/512/190/190411.png" alt="Success">
       <h3>Shared Successfully!</h3>
       <p>Your content has been shared with selected users.</p>
       <button onclick="closeNotification()">OK</button>

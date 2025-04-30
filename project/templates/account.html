@@ -19,9 +19,6 @@
     </a>
     <h1>Wellness Tracker</h1>
     <div class="nav-buttons">
-        <a href="{{ url_for('main.home') }}">
-            <button>Home Page</button>
-        </a>
         <a href="{{ url_for('main.account') }}">
             <button>Account</button>
         </a>
@@ -38,7 +35,7 @@
 <!-- Centered Form Area -->
 <div class="form-container">
     <h2>Enter Your Details</h2>
-    <form action="{{'health_data'}}" method="GET">
+    <form action="{{'health_data'}}" method="post">
         <label for="unique_number">Unique Number:</label>
         <input type="text" id="unique_number" name="unique_number" placeholder="e.g. 1234567890" required>
 
