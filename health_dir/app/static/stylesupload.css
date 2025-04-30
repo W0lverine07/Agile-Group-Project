@@ -63,30 +63,49 @@ header h1 {
   text-decoration: none;
 }
 
-.content {
-  text-align: center;
-  margin-top: 40px;
+form {
+  width: 80%;
+  max-width: 600px;
+  margin: 30px auto;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 12px;
+}
+
+form label {
+  display: block;
+  color: #fff;
+  margin-bottom: 5px;
 }
 
 h2 {
-  font-size: 28px;
-  margin-bottom: 30px;
+  text-align: center;
 }
 
-.faq {
-  margin-bottom: 20px;
-  background-color: rgba(0, 0, 0, 0.7);
-  padding: 15px;
-  border-radius: 8px;
+form input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  border: 1px solid #fff;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #fff;
 }
 
-.faq h3 {
-  font-size: 20px;
-  color: #ff0000;
+form input[type="number"]:focus {
+  border-color: #ff0000;
 }
 
-.faq p {
-  font-size: 16px;
-  line-height: 1.5;
+button {
+  background-color: #ff0000;
   color: white;
+  padding: 10px 18px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #16a085;
 }

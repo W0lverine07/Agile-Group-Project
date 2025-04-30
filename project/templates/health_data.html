@@ -38,22 +38,22 @@
 </head>
 <body>
   <header>
-    <a href="{{ url_for('home') }}" class="logo-link">
+    <a href="{{ url_for('main.home') }}" class="logo-link">
       <img src="https://static.vecteezy.com/system/resources/previews/013/547/909/non_2x/smartwatch-logo-design-watch-combine-with-bulb-logo-design-modern-concept-vector.jpg" 
            alt="Wellness Tracker Logo" class="logo">
     </a>
     <h1>Wellness Tracker</h1>
     <div class="nav-buttons">
-      <a href="{{ url_for('home') }}">
+      <a href="{{ url_for('main.home') }}">
             <button>Home Page</button>
         </a>
-        <a href="{{ url_for('account') }}">
+        <a href="{{ url_for('main.account') }}">
             <button>Account</button>
         </a>
-        <a href="{{ url_for('faqs') }}">
+        <a href="{{ url_for('main.faqs') }}">
             <button>FAQ's</button>
         </a>
-        <a href="{{ url_for('history') }}">
+        <a href="{{ url_for('main.history') }}">
             <button>History</button>
         </a>
     </div>
@@ -64,24 +64,23 @@
 
     <div class="options-row">
         <!-- Upload button -->
-        <a href="{{ url_for('upload') }}" class="option">
+        <a href="{{ url_for('main.upload') }}" class="option">
             <img src="https://img.icons8.com/clouds/300/upload.png" alt="Upload Data" />
             <p>Upload Data</p>
         </a>
 
         <!-- Visualize button -->
-        <a href="{{ url_for('visualize') }}" class="option">
+        <a href="{{ url_for('main.visualize') }}" class="option">
             <img src="https://img.icons8.com/clouds/300/combo-chart.png" alt="Visualize Data" />
             <p>Visualize Data</p>
         </a>
 
         <!-- Share button (triggers the share prompt) -->
-        <a href="{{ url_for('share_page') }}" class="option" onclick="shareData()">
+        <a href="{{ url_for('main.share_page') }}" class="option" onclick="shareData()">
             <img src="https://img.icons8.com/clouds/300/share.png" alt="Share Data" />
             <p>Share Data</p>
         </a>
     </div>
-
 
   </main>
 
