@@ -1,0 +1,70 @@
+/* Top-level container adjustment */
+.form-container {
+    margin: 0 auto;
+    background-color: rgba(0, 0, 0, 0.75);
+    border-radius: 20px;
+    padding: 40px 30px;
+    margin-top: 10px; /* Red area fix: adds spacing from header */
+    width: 100%;
+    max-width: 700px;  /* Green arrow fix: makes form wider */
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+    color: #fff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Heading */
+.form-container h2 {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+/* Label styling */
+.form-group label {
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 8px;
+    display: block;
+}
+
+/* Inputs and Selects */
+.custom-input,
+.custom-select {
+    width: 100%;
+    padding: 12px;
+    font-size: 15px;
+    border-radius: 8px;
+    border: none;
+    background-color: #1c1c1c;
+    color: #ffffff;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+}
+
+.custom-input::placeholder {
+    color: #aaaaaa;
+}
+
+.custom-select option {
+    background-color: #000;
+    color: #fff;
+}
+
+/* Submit button */
+.submit-button {
+    background-color: #ff0000;
+    color: #fff;
+    padding: 14px;
+    border-radius: 10px;
+    font-size: 16px;
+    border: none;
+    width: 100%;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+}
+
+.submit-button:hover {
+    background-color: #16a085;
+}
