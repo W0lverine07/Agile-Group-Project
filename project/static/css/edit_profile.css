@@ -4,9 +4,9 @@
     background-color: rgba(0, 0, 0, 0.75);
     border-radius: 20px;
     padding: 40px 30px;
-    margin-top: 10px; /* Red area fix: adds spacing from header */
+    margin-top: 10px; 
     width: 100%;
-    max-width: 700px;  /* Green arrow fix: makes form wider */
+    max-width: 700px;
     box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
     color: #fff;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;

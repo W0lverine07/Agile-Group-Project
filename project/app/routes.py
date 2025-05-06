@@ -1,6 +1,10 @@
 from flask import Blueprint, request, redirect, url_for, render_template, flash
 from app.db_helper import get_db_connection
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask import session
+from datetime import datetime
+from app.models import db, UserDetails, User
+import random
 
 main = Blueprint('main', __name__)
 
@@ -9,6 +13,13 @@ main = Blueprint('main', __name__)
 def home():
     return render_template('login.html')
 
+#generate a unique user ID for the new user
+def generate_unique_user_id():
+    while True:
+        user_id = random.randint(100000, 999999)
+        if not User.query.filter_by(user_id=user_id).first():
+            return user_id
+        
 @main.route('/register', methods=['POST'])
 def register():
     username = request.form.get('username')
@@ -23,38 +34,83 @@ def register():
         flash("Passwords do not match", "error")
         return redirect(url_for('main.home'))
 
-    conn = get_db_connection()
-    user = conn.execute('SELECT * FROM user WHERE username = ?', (username,)).fetchone()
-
-    if user:
-        conn.close()
+    existing_user = User.query.filter_by(username=username).first()
+    if existing_user:
         flash("Username already exists", "error")
         return redirect(url_for('main.home'))
 
     hashed_pw = generate_password_hash(password)
-    conn.execute('INSERT INTO user (username, password_hash) VALUES (?, ?)', (username, hashed_pw))
-    conn.commit()
-    conn.close()
+    user_id = generate_unique_user_id()
+    new_user = User(user_id=user_id, username=username, password_hash=hashed_pw)
+    db.session.add(new_user)
+    db.session.commit()
 
-    flash("Registration successful! Please log in.", "success")
-    return redirect(url_for('main.home'))
+    session['registered_username'] = username  #Storing the username in session for later use
+    return redirect(url_for('main.edit_profile'))
 
 @main.route('/login', methods=['POST'])
 def login():
     username = request.form.get('username')
     password = request.form.get('password')
 
-    conn = get_db_connection()
-    user = conn.execute('SELECT * FROM user WHERE username = ?', (username,)).fetchone()
-    conn.close()
-
-    if user and check_password_hash(user['password_hash'], password):
+    user = User.query.filter_by(username=username).first()
+    if user and check_password_hash(user.password_hash, password):
         flash("Login successful!", "success")
         return redirect(url_for('main.account'))
     else:
         flash("Invalid username or password", "error")
         return redirect(url_for('main.home'))
 
+#start of the profile page logic
+#For edit profile and save profile
+@main.route('/edit_profile')
+def edit_profile():
+    username = session.get('registered_username')
+    if not username:
+        flash("No registration session found. Please register again.", "error")
+        return redirect(url_for('main.home'))
+    return render_template('edit_profile.html', username=username)
+
+@main.route('/save_profile', methods=['POST'])
+def save_profile():
+    username = session.get('registered_username')
+    if not username:
+        flash("Session expired. Please register again.", "error")
+        return redirect(url_for('main.home'))
+
+    # Get data from the form
+    first_name = request.form.get('first_name')
+    last_name = request.form.get('last_name')
+    email = request.form.get('email')
+    blood_group = request.form.get('blood_group')
+    dob_str = request.form.get('dob')
+    weight = request.form.get('weight')
+    height = request.form.get('height')
+
+    try:
+        dob = datetime.strptime(dob_str, "%Y-%m-%d").date()
+
+        user_details = UserDetails(
+            username=username,
+            first_name=first_name,
+            last_name=last_name,
+            email=email,
+            blood_group=blood_group,
+            dob=dob,
+            weight=float(weight),
+            height=float(height)
+        )
+
+        db.session.add(user_details)
+        db.session.commit()
+        session.pop('registered_username', None)
+
+        flash("Profile updated successfully!", "success")
+        return redirect(url_for('main.account'))
+    except Exception as e:
+        flash(f"Error saving profile: {e}", "error")
+        return redirect(url_for('main.edit_profile'))
+#end of the profile page logic
 
 @main.route('/account')
 def account():
