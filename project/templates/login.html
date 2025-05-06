@@ -56,6 +56,7 @@
             <p class="subtitle">Continue your fitness journey</p>
 
             <form action="{{ url_for('main.login') }}" method="POST"> <!-- since the entered password and username is checked using User.check_password() -->
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
                 <div class="input-group">
                     <div class="input-icon">
                         <i class="fas fa-user"></i>
@@ -91,6 +92,7 @@
             <p class="subtitle">Start your fitness journey</p>
 
             <form action="{{ url_for('main.register') }}" method="POST">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
                 <div class="input-group">
                     <div class="input-icon">
                         <i class="fas fa-user"></i>

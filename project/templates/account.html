@@ -36,6 +36,7 @@
 <div class="form-container">
     <h2>Enter Your Details</h2>
     <form action="{{'health_data'}}" method="post">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
         <label for="unique_number">Unique Number:</label>
         <input type="text" id="unique_number" name="unique_number" placeholder="e.g. 1234567890" required>
 
