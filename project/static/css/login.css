@@ -406,6 +406,12 @@ h1 {
   color: #7aafff;
 }
 
+.feedback-text {
+  font-size: 0.9em;
+  margin: 4px 0 12px 3px;
+  display: block;
+}
+
 /* media queries */
 @media (max-width: 1100px) {
   .auth-container {

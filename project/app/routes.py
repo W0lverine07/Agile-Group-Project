@@ -4,6 +4,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask import session
 from datetime import datetime
 from app.models import db, UserDetails, User
+from flask import jsonify
 import random
 
 main = Blueprint('main', __name__)
@@ -47,6 +48,13 @@ def register():
 
     session['registered_username'] = username  #Storing the username in session for later use
     return redirect(url_for('main.edit_profile'))
+
+#start of the check username in database
+@main.route('/check_username', methods=['POST'])
+def check_username():
+    username = request.form.get('username')
+    exists = User.query.filter_by(username=username).first() is not None
+    return jsonify({'exists': exists})
 
 @main.route('/login', methods=['POST'])
 def login():
