@@ -9,18 +9,17 @@ import random
 
 main = Blueprint('main', __name__)
 
-
 @main.route('/')
 def home():
-    return render_template('login.html')
+    return render_template('index.html')  # Assuming you prefer index.html
 
-#generate a unique user ID for the new user
+# Generate a unique user ID for the new user
 def generate_unique_user_id():
     while True:
         user_id = random.randint(100000, 999999)
         if not User.query.filter_by(user_id=user_id).first():
             return user_id
-        
+
 @main.route('/register', methods=['POST'])
 def register():
     username = request.form.get('username')
@@ -46,31 +45,32 @@ def register():
     db.session.add(new_user)
     db.session.commit()
 
-    session['registered_username'] = username  #Storing the username in session for later use
+    session['registered_username'] = username  # storing username in session
     return redirect(url_for('main.edit_profile'))
 
-#start of the check username in database
 @main.route('/check_username', methods=['POST'])
 def check_username():
     username = request.form.get('username')
     exists = User.query.filter_by(username=username).first() is not None
     return jsonify({'exists': exists})
 
-@main.route('/login', methods=['POST'])
+@main.route('/login', methods=['GET', 'POST'])
 def login():
-    username = request.form.get('username')
-    password = request.form.get('password')
+    if request.method == 'POST':
+        username = request.form.get('username')
+        password = request.form.get('password')
 
-    user = User.query.filter_by(username=username).first()
-    if user and check_password_hash(user.password_hash, password):
-        flash("Login successful!", "success")
-        return redirect(url_for('main.account'))
-    else:
-        flash("Invalid username or password", "error")
-        return redirect(url_for('main.home'))
+        user = User.query.filter_by(username=username).first()
+        if user and check_password_hash(user.password_hash, password):
+            flash("Login successful!", "success")
+            return redirect(url_for('main.account'))
+        else:
+            flash("Invalid username or password", "error")
+            return redirect(url_for('main.home'))
 
-#start of the profile page logic
-#For edit profile and save profile
+    # If GET request, render the login page
+    return render_template('login.html')
+
 @main.route('/edit_profile')
 def edit_profile():
     username = session.get('registered_username')
@@ -86,7 +86,7 @@ def save_profile():
         flash("Session expired. Please register again.", "error")
         return redirect(url_for('main.home'))
 
-    # Get data from the form
+    # get data from form
     first_name = request.form.get('first_name')
     last_name = request.form.get('last_name')
     email = request.form.get('email')
@@ -118,7 +118,6 @@ def save_profile():
     except Exception as e:
         flash(f"Error saving profile: {e}", "error")
         return redirect(url_for('main.edit_profile'))
-#end of the profile page logic
 
 @main.route('/account')
 def account():
@@ -136,7 +135,6 @@ def visualize():
 def share_page():
     return render_template('share_page.html')
 
-
 @main.route('/health_data', methods=['POST'])
 def health_data():
     return render_template('health_data.html')
@@ -148,4 +146,3 @@ def faqs():
 @main.route('/history')
 def history():
     return render_template('history.html')
-
