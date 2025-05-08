@@ -11,9 +11,9 @@ main = Blueprint('main', __name__)
 
 @main.route('/')
 def home():
-    return render_template('index.html')
+    return render_template('index.html')  
 
-# generate a unique user ID for the new user
+# Generate a unique user ID for the new user
 def generate_unique_user_id():
     while True:
         user_id = random.randint(100000, 999999)
@@ -68,6 +68,7 @@ def login():
             flash("Invalid username or password", "error")
             return redirect(url_for('main.home'))
 
+    # If GET request, render the login page
     return render_template('login.html')
 
 @main.route('/edit_profile')
