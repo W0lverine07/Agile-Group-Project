@@ -14,18 +14,10 @@
     </a>
     <h1>Wellness Tracker</h1>
     <div class="nav-buttons">
-        <a href="{{ url_for('main.home') }}">
-            <button>Home Page</button>
-        </a>
-        <a href="{{ url_for('main.login') }}">
-            <button>Login</button>
-        </a>
-        <a href="{{ url_for('main.faqs') }}">
-            <button>FAQ's</button>
-        </a>
-        <a href="{{ url_for('main.history') }}">
-            <button>History</button>
-        </a>
+        <a href="{{ url_for('main.home') }}"><button>Home Page</button></a>
+        <a href="{{ url_for('main.login') }}"><button>Login</button></a>
+        <a href="{{ url_for('main.faqs') }}"><button>FAQ's</button></a>
+        <a href="{{ url_for('main.history') }}"><button>History</button></a>
     </div>
 </header>
 
@@ -33,52 +25,57 @@
 
     <section class="content-block reverse">
         <div class="text">
-            <h2>Smarter Daily Tracking</h2>
-            <p>Wellness Tracker keeps up with your every move. From steps taken to calories burned, you get personalized insights to help improve your lifestyle, without interrupting your day.</p>
+            <h2>Input Your Wellness Data</h2>
+            <p>Manually enter your fitness and health data, such as steps walked, calories burned, and hours slept.
+                This flexibility lets you use data from any fitness tracker or even manually noted records.
+                You stay in control of what you share and track.</p>
         </div>
         <div class="image">
-            <img src="https://img.icons8.com/clouds/500/walking.png" alt="Walking Icon"/>
+            <img src="https://img.icons8.com/fluency/452/edit-property.png" alt="Data Input Icon"/>
         </div>
     </section>
 
     <section class="content-block">
         <div class="image">
-            <img src="https://img.icons8.com/?size=100&id=aMjpjszRU4DZ&format=png&color=000000" alt="New Design Icon"/>
+            <img src="https://img.icons8.com/fluency/452/combo-chart.png" alt="Insights Icon"/>
         </div>
         <div class="text">
-            <h2>Refined, Wearable Design</h2>
-            <p>Designed with both comfort and style in mind, our tracker feels natural on your wrist while packing a full suite of features that stay hidden until you need them.</p>
+            <h2>Get Clear Insights</h2>
+            <p>We analyze your inputs to identify trends and provide meaningful insights into your overall wellness.
+                See your patterns over time, like sleep consistency or changes in calorie burn, through visual graphs and summaries.</p>
         </div>
     </section>
 
     <section class="content-block reverse">
         <div class="text">
-            <h2>Reliable Health Data</h2>
-            <p>Access accurate metrics like heart rate, sleep hours, and stress levels. With consistent data capture and real-time syncing, you’ll never miss what your body is telling you.</p>
+            <h2>Make Smarter Choices</h2>
+            <p>Use your personalized wellness data to improve your daily habits and routines.
+                We help you understand how your activity, sleep, and other factors affect your well-being — and where you can improve.</p>
         </div>
         <div class="image">
-            <img src="https://img.icons8.com/clouds/500/checked.png" alt="Quality Check Icon"/>
+            <img src="https://img.icons8.com/fluency/452/idea.png" alt="Decision Support Icon"/>
         </div>
     </section>
 
     <section class="content-block">
         <div class="image">
-            <img src="https://img.icons8.com/clouds/500/combo-chart.png" alt="Data Chart Icon"/>
+            <img src="https://img.icons8.com/fluency/452/cloud.png" alt="Web Access Icon"/>
         </div>
         <div class="text">
-            <h2>Insights that Evolve</h2>
-            <p>Using trends and history, Wellness Tracker adapts over time to give smarter tips, better goals, and meaningful feedback to guide your long-term wellness journey.</p>
+            <h2>Access Anywhere, Anytime</h2>
+            <p>Our web application is always available — no need for downloads or device syncing.
+                All your data is saved securely and can be accessed from your phone, tablet, or computer whenever you need it.</p>
         </div>
     </section>
 
 </main>
 
 <div class="account-button-container">
-    <a href="{{ url_for('main.account') }}">
+    <a href="{{ url_for('main.login') }}">
         <img
-                src="https://img.icons8.com/?size=100&id=23477&format=png&color=000000"
-                alt="Access Account"
-                class="account-image-button"
+            src="https://img.icons8.com/?size=100&id=23477&format=png&color=000000"
+            alt="Access Account"
+            class="account-image-button"
         />
     </a>
 </div>
