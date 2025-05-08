@@ -7,7 +7,7 @@ main = Blueprint('main', __name__)
 
 @main.route('/')
 def home():
-    return render_template('login.html')
+    return render_template('index.html')
 
 @main.route('/register', methods=['POST'])
 def register():
@@ -84,4 +84,8 @@ def faqs():
 @main.route('/history')
 def history():
     return render_template('history.html')
+
+@main.route('/login')
+def history():
+    return render_template('login.html')
 
