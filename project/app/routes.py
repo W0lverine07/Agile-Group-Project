@@ -142,7 +142,8 @@ def health_data():
 @main.route('/faqs')
 def faqs():
     return render_template('faqs.html')
-
+  
 @main.route('/history')
 def history():
     return render_template('history.html')
+
