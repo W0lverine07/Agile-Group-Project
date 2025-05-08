@@ -11,7 +11,7 @@ main = Blueprint('main', __name__)
 
 @main.route('/')
 def home():
-    return render_template('index.html')  # Assuming you prefer index.html
+    return render_template('index.html')  
 
 # Generate a unique user ID for the new user
 def generate_unique_user_id():
