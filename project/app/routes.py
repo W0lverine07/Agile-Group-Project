@@ -39,22 +39,24 @@ def register():
     flash("Registration successful! Please log in.", "success")
     return redirect(url_for('main.home'))
 
-@main.route('/login', methods=['POST'])
+@main.route('/login', methods=['GET', 'POST'])
 def login():
-    username = request.form.get('username')
-    password = request.form.get('password')
+    if request.method == 'POST':
+        username = request.form.get('username')
+        password = request.form.get('password')
 
-    conn = get_db_connection()
-    user = conn.execute('SELECT * FROM user WHERE username = ?', (username,)).fetchone()
-    conn.close()
+        conn = get_db_connection()
+        user = conn.execute('SELECT * FROM user WHERE username = ?', (username,)).fetchone()
+        conn.close()
 
-    if user and check_password_hash(user['password_hash'], password):
-        flash("Login successful!", "success")
-        return redirect(url_for('main.account'))
-    else:
-        flash("Invalid username or password", "error")
-        return redirect(url_for('main.home'))
-
+        if user and check_password_hash(user['password_hash'], password):
+            flash("Login successful!", "success")
+            return redirect(url_for('main.account'))
+        else:
+            flash("Invalid username or password", "error")
+            return redirect(url_for('main.login'))
+    
+    return render_template('login.html')
 
 @main.route('/account')
 def account():
@@ -85,7 +87,5 @@ def faqs():
 def history():
     return render_template('history.html')
 
-@main.route('/login')
-def login():
-    return render_template('login.html')
+
 
