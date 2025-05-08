@@ -86,6 +86,6 @@ def history():
     return render_template('history.html')
 
 @main.route('/login')
-def history():
+def login():
     return render_template('login.html')
 
