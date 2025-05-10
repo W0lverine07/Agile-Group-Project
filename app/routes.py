@@ -17,6 +17,10 @@ main = Blueprint('main', __name__)
 @main.route('/')
 def home():
     return render_template('login.html')
+
+@main.route('/dashboard')
+def dashboard():
+    return render_template('health_data.html')
         
 @main.route('/register', methods=['POST'])
 def register():
@@ -126,16 +130,26 @@ def save_profile():
         db.session.commit()
         session.pop('registered_username', None)
 
-        flash("Profile updated successfully!", "success")
-        return redirect(url_for('main.health_data'))
+        session.pop('registered_username', None)
+        flash("Profile updated successfully! Please log in using your new credentials.", "info")
+        return redirect(url_for('main.home'))
     except Exception as e:
         flash(f"Error saving profile: {e}", "error")
         return redirect(url_for('main.edit_profile'))
 #end of the profile page logic
 
 @main.route('/account')
+@login_required
 def account():
-    return render_template('account.html')
+    username = session['username']
+    user = UserDetails.query.filter_by(username=username).first()
+
+    if not user:
+        flash("User profile not found.", "error")
+        return redirect(url_for('main.home'))
+
+    return render_template('account.html', user=user)
+
 
 # Protecting routes that need authentication by adding @login_required
 @main.route('/upload')

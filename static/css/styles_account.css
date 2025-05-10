@@ -73,68 +73,31 @@ header h1 {
   text-decoration: none;
 }
 
-/* Form styles */
-.form-container {
-  background-color: rgba(0, 0, 0, 0.7);
-  padding: 30px 40px;
-  border-radius: 15px;
-  max-width: 400px;
-  margin: 60px auto;
-  box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
-  animation: fadeIn 1s ease-in-out;
-}
-
-.form-container h2 {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.form-container label {
-  display: block;
-  margin-top: 12px;
-  font-size: 16px;
-}
-
-.form-container input {
-  width: 100%;
-  padding: 12px;
-  margin-top: 8px;
-  margin-bottom: 16px;
-  border-radius: 6px;
-  border: 2px solid transparent;
-  background-color: #222;
-  color: #fff;
-  font-size: 16px;
-  transition: border-color 0.3s ease;
-}
-
-.form-container input:invalid {
-  border-color: red;
-}
-
-.form-container input:focus {
-  outline: none;
-  border-color: #16a085;
-}
-
-.form-container button {
-  width: 100%;
-  padding: 12px;
-  background-color: #ff0000;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.form-container button:hover {
-  background-color: #16a085;
-}
 
 /* Animation */
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
+}
+
+/* Top-level container adjustment */
+.form-container {
+    margin: 0 auto;
+    background-color: rgba(0, 0, 0, 0.75);
+    border-radius: 20px;
+    padding: 40px 30px;
+    margin-top: 10px; 
+    width: 100%;
+    max-width: 700px;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+    color: #fff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Heading */
+.form-container h2 {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 10px;
+    font-weight: bold;
 }
