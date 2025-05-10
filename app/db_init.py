@@ -1,7 +1,15 @@
 from app.models import db, ExerciseType
+from sqlalchemy import inspect
 
 def populate_exercise_types():
     """Populate the exercise_types table with initial data"""
+    # Check if table exists using inspector
+    inspector = inspect(db.engine)
+    if 'exercise_types' not in inspector.get_table_names():
+        # Create table if it doesn't exist
+        db.create_all()
+        print("Created exercise_types table")
+
     # Define the default exercise types
     exercise_types = [
         {'id': 1, 'name': 'Running', 'calories_per_minute': 11.5},
@@ -18,7 +26,7 @@ def populate_exercise_types():
     
     # Add exercise types if they don't exist
     for exercise_data in exercise_types:
-        existing = ExerciseType.query.get(exercise_data['id'])
+        existing = db.session.get(ExerciseType, exercise_data['id'])
         if not existing:
             exercise_type = ExerciseType(
                 id=exercise_data['id'],

@@ -3,18 +3,20 @@ from datetime import date
 
 db = SQLAlchemy()
 
+# Define the models for the application
+# Making username as the primary key for the User table and user_details table
 class User(db.Model):
     __tablename__ = 'user'
-    user_id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(50), primary_key=True, unique=True, nullable=False)
+    username = db.Column(db.String(50), primary_key=True)
     password_hash = db.Column(db.String(128), nullable=False)
 
+    # Relationship to user details (one-to-one)
+    details = db.relationship('UserDetails', backref='user', uselist=False, cascade="all, delete-orphan")
     activities = db.relationship('ActivityData', backref='user', lazy=True)
 
 class UserDetails(db.Model):
     __tablename__ = 'user_details'
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(50), unique=True, nullable=False)
+    username = db.Column(db.String(50), db.ForeignKey('user.username'), primary_key=True)
     first_name = db.Column(db.String(50), nullable=False)
     last_name = db.Column(db.String(50), nullable=False)
     email = db.Column(db.String(100), unique=True, nullable=False)
@@ -39,25 +41,26 @@ class ActivityData(db.Model):
     __tablename__ = 'activity_data'
     
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'), nullable=False)
+    username = db.Column(db.String(50), db.ForeignKey('user.username'), nullable=False)
     exercise_type_id = db.Column(db.Integer, db.ForeignKey('exercise_types.id'), nullable=False)
-    date = db.Column(db.String(10), nullable=False)  # Store as YYYY-MM-DD
+    date = db.Column(db.String(10), nullable=False)
     duration_minutes = db.Column(db.Integer, nullable=False)
     calories_burnt = db.Column(db.Integer, nullable=False)
     
     def __repr__(self):
         return f'<ActivityData {self.id} - {self.date}>'
 
+# Updateed the SharedContent model to use username instead of user_id
 class SharedContent(db.Model):
     __tablename__ = 'shared_content'
     
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'), nullable=False)
-    shared_with_id = db.Column(db.Integer, db.ForeignKey('user.user_id'), nullable=False)
-    content_type = db.Column(db.String(20), nullable=False)  # 'activity', 'achievement', 'stats'
+    username = db.Column(db.String(50), db.ForeignKey('user.username'), nullable=False)  # Changed
+    shared_with_username = db.Column(db.String(50), db.ForeignKey('user.username'), nullable=False)  # Changed
+    content_type = db.Column(db.String(20), nullable=False)
     content_id = db.Column(db.String(50), nullable=False)
     message = db.Column(db.Text, nullable=True)
-    share_date = db.Column(db.String(10), nullable=False)  # Store as YYYY-MM-DD
+    share_date = db.Column(db.String(10), nullable=False)
     
     def __repr__(self):
         return f'<SharedContent {self.id} - {self.content_type}>'
