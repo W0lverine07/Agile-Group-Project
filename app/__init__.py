@@ -19,6 +19,14 @@ def create_app():
     db.init_app(app)
     migrate = Migrate(app, db)
     
+    # Initializing database within app context
+    with app.app_context():
+        db.create_all()
+        try:
+            populate_exercise_types()
+        except Exception as e:
+            print(f"Error populating exercise types: {e}")
+    
     from app.routes import main
     app.register_blueprint(main)
 
