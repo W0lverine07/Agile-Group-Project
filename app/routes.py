@@ -6,6 +6,9 @@ from datetime import datetime, timedelta
 from app.models import db, UserDetails, User
 from flask import jsonify
 from app.models import db, User, ExerciseType, ActivityData, SharedContent
+from functools import wraps
+import random # for generating random strings (Activity_id)
+import string # for generating random strings (Activity_id)
 import random, json
 
 main = Blueprint('main', __name__)
@@ -14,13 +17,6 @@ main = Blueprint('main', __name__)
 @main.route('/')
 def home():
     return render_template('login.html')
-
-#generate a unique user ID for the new user
-def generate_unique_user_id():
-    while True:
-        user_id = random.randint(100000, 999999)
-        if not User.query.filter_by(user_id=user_id).first():
-            return user_id
         
 @main.route('/register', methods=['POST'])
 def register():
@@ -42,8 +38,7 @@ def register():
         return redirect(url_for('main.home'))
 
     hashed_pw = generate_password_hash(password)
-    user_id = generate_unique_user_id()
-    new_user = User(user_id=user_id, username=username, password_hash=hashed_pw)
+    new_user = User(username=username, password_hash=hashed_pw)
     db.session.add(new_user)
     db.session.commit()
 
@@ -64,8 +59,8 @@ def login():
 
     user = User.query.filter_by(username=username).first()
     if user and check_password_hash(user.password_hash, password):
-        session['user_id'] = user.user_id  # Or user.id depending on your model
-        session['username'] = username  # Also store username if needed
+        session['username'] = username  # Only store username in session not user_id
+        session['logged_in'] = True
         flash("Login successful!", "success")
         return redirect(url_for('main.health_data'))
     else:
@@ -74,9 +69,18 @@ def login():
 
 @main.route('/logout')
 def logout():
-    session.clear()
+    session.clear()  # Clears all session data
     flash("You have been logged out.", "info")
     return redirect(url_for('main.home'))
+
+def login_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if 'username' not in session:
+            flash("Please log in to access this page.", "error")
+            return redirect(url_for('main.home'))
+        return f(*args, **kwargs)
+    return decorated_function
 
 #start of the profile page logic
 #For edit profile and save profile
@@ -133,46 +137,64 @@ def save_profile():
 def account():
     return render_template('account.html')
 
+# Protecting routes that need authentication by adding @login_required
 @main.route('/upload')
+@login_required
 def upload():
-    # Get exercise types for the dropdown
     exercise_types = ExerciseType.query.order_by(ExerciseType.name).all()
-    return render_template('upload.html', exercise_types=exercise_types, today=datetime.now().strftime('%Y-%m-%d'))
+    return render_template('upload.html', 
+                         exercise_types=exercise_types, 
+                         today=datetime.now().strftime('%Y-%m-%d'),
+                         username=session['username'])
 
+#generating Activity ID in format: username-XXX where XXX is random alphanumeric
+def generate_activity_id(username):
+    random_chars = ''.join(random.choices(string.ascii_letters + string.digits, k=3))
+    return f"{username}-{random_chars}"
+
+# Update upload_data route to use username
 @main.route('/upload_data', methods=['POST'])
+@login_required
 def upload_data():
-    user_id = session['user_id']
+    username = session['username']  # Get username from session
     exercise_type_id = request.form.get('exercise_type', type=int)
     duration = request.form.get('duration', type=int)
     date = request.form.get('date', datetime.now().strftime('%Y-%m-%d'))
     
-    # Validate inputs
     if not exercise_type_id or not duration:
         flash("Exercise type and duration are required", "error")
         return redirect(url_for('main.upload'))
     
-    # Calculate calories based on exercise type and duration
     exercise_type = ExerciseType.query.get(exercise_type_id)
     calories = round(exercise_type.calories_per_minute * duration)
     
-    # Insert the activity data
+    # Generate unique ID
+    max_attempts = 5
+    for _ in range(max_attempts):
+        activity_id = generate_activity_id(username)
+        if not ActivityData.query.get(activity_id):
+            break
+    else:
+        flash("Failed to generate unique activity ID. Please try again.", "error")
+        return redirect(url_for('main.upload'))
+    
     new_activity = ActivityData(
-        user_id=user_id, 
+        id=activity_id,
+        username=username,  # Now using username instead of user_id
         exercise_type_id=exercise_type_id,
         date=date,
         duration_minutes=duration,
         calories_burnt=calories
     )
-    
+        
     db.session.add(new_activity)
     db.session.commit()
     
-    # flash("Activity data added successfully!", "success")
     return redirect(url_for('main.visualize'))
 
 @main.route('/visualize')
 def visualize():
-    user_id = session['user_id']
+    username = session['username']
     time_period = request.args.get('period', 'week')
     
     # Get current date
@@ -198,7 +220,7 @@ def visualize():
     ).join(
         ExerciseType, ActivityData.exercise_type_id == ExerciseType.id
     ).filter(
-        ActivityData.user_id == user_id,
+        ActivityData.username == username,
         ActivityData.date >= start_date
     ).order_by(
         ActivityData.date
@@ -221,12 +243,11 @@ def visualize():
     return render_template('visualize.html', 
                            health_data=json.dumps(formatted_data),
                            time_period=time_period,
-                           user_id=user_id,
                            username=session.get('username'))
 
 @main.route('/api/health_data')
 def get_health_data():
-    user_id = session['user_id']
+    username = session['username']
     period = request.args.get('period', 'week')
     
     # Calculate date range based on period
@@ -250,7 +271,7 @@ def get_health_data():
     ).join(
         ExerciseType, ActivityData.exercise_type_id == ExerciseType.id
     ).filter(
-        ActivityData.user_id == user_id,
+        ActivityData.username == username,
         ActivityData.date >= start_date
     ).order_by(
         ActivityData.date
@@ -306,7 +327,7 @@ def health_data():
 
 @main.route('/api/share_data', methods=['POST'])
 def share_data():
-    user_id = session['user_id']
+    username = session['username']
     shared_with = request.form.get('shared_with_id')
     content_type = request.form.get('content_type')  # 'activity', 'achievement', 'stats'
     content_id = request.form.get('content_id')
@@ -323,7 +344,7 @@ def share_data():
     
     # Store the share in the database
     new_share = SharedContent(
-        user_id=user_id,
+        username = username,
         shared_with_id=shared_with,
         content_type=content_type,
         content_id=content_id,
@@ -338,15 +359,15 @@ def share_data():
 
 @main.route('/api/shared_with_me')
 def shared_with_me():
-    user_id = session['user_id']
+    username = session['username']
     
     # Get data shared with the current user
     shared_items = db.session.query(
         SharedContent, User.username.label('shared_by_username')
     ).join(
-        User, SharedContent.user_id == User.id
+        User, SharedContent.username == User.username
     ).filter(
-        SharedContent.shared_with_id == user_id
+        SharedContent.shared_with_id == username
     ).order_by(
         SharedContent.share_date.desc()
     ).all()
