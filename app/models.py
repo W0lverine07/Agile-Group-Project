@@ -40,7 +40,7 @@ class ExerciseType(db.Model):
 class ActivityData(db.Model):
     __tablename__ = 'activity_data'
     
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.String(50), primary_key=True)  # Changed to String/VARCHAR
     username = db.Column(db.String(50), db.ForeignKey('user.username'), nullable=False)
     exercise_type_id = db.Column(db.Integer, db.ForeignKey('exercise_types.id'), nullable=False)
     date = db.Column(db.String(10), nullable=False)
