@@ -35,16 +35,16 @@ def register():
 
     if not username or not password or not confirm_password:
         flash("All fields are required", "error")
-        return redirect(url_for('main.home'))
+        return redirect(url_for('main.login'))
 
     if password != confirm_password:
         flash("Passwords do not match", "error")
-        return redirect(url_for('main.home'))
+        return redirect(url_for('main.login'))
 
     existing_user = User.query.filter_by(username=username).first()
     if existing_user:
         flash("Username already exists", "error")
-        return redirect(url_for('main.home'))
+        return redirect(url_for('main.login'))
 
     hashed_pw = generate_password_hash(password)
     new_user = User(username=username, password_hash=hashed_pw)
@@ -61,34 +61,33 @@ def check_username():
     exists = User.query.filter_by(username=username).first() is not None
     return jsonify({'exists': exists})
 
-@main.route('/login', methods=['GET', 'POST'])
+@main.route('/login', methods=['POST'])
 def login():
-    if request.method == 'POST':
-        username = request.form.get('username')
-        password = request.form.get('password')
+    username = request.form.get('username')
+    password = request.form.get('password')
 
-        user = User.query.filter_by(username=username).first()
-        if user and check_password_hash(user.password_hash, password):
-            flash("Login successful!", "success")
-            return redirect(url_for('main.account'))
-        else:
-            flash("Invalid username or password", "error")
-            return redirect(url_for('main.home'))
-
-    return render_template('login.html')
+    user = User.query.filter_by(username=username).first()
+    if user and check_password_hash(user.password_hash, password):
+        session['username'] = username  # Only store username in session not user_id
+        session['logged_in'] = True
+        flash("Login successful!", "success")
+        return redirect(url_for('main.health_data'))
+    else:
+        flash("Invalid username or password", "error")
+        return redirect(url_for('main.login'))
 
 @main.route('/logout')
 def logout():
     session.clear()  # Clears all session data
     flash("You have been logged out.", "info")
-    return redirect(url_for('main.home'))
+    return redirect(url_for('main.login'))
 
 def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
         if 'username' not in session:
             flash("Please log in to access this page.", "error")
-            return redirect(url_for('main.home'))
+            return redirect(url_for('main.login'))
         return f(*args, **kwargs)
     return decorated_function
 
@@ -99,7 +98,7 @@ def edit_profile():
     username = session.get('registered_username')
     if not username:
         flash("No registration session found. Please register again.", "error")
-        return redirect(url_for('main.home'))
+        return redirect(url_for('main.login'))
     return render_template('edit_profile.html', username=username)
 
 @main.route('/save_profile', methods=['POST'])
@@ -107,7 +106,7 @@ def save_profile():
     username = session.get('registered_username')
     if not username:
         flash("Session expired. Please register again.", "error")
-        return redirect(url_for('main.home'))
+        return redirect(url_for('main.login'))
 
     # Get data from the form
     first_name = request.form.get('first_name')
@@ -142,7 +141,7 @@ def save_profile():
 
         session.pop('registered_username', None)
         flash("Profile updated successfully! Please log in using your new credentials.", "info")
-        return redirect(url_for('main.home'))
+        return redirect(url_for('main.login'))
     except Exception as e:
         flash(f"Error saving profile: {e}", "error")
         return redirect(url_for('main.edit_profile'))
@@ -156,7 +155,7 @@ def account():
 
     if not user:
         flash("User profile not found.", "error")
-        return redirect(url_for('main.home'))
+        return redirect(url_for('main.login'))
 #FOR STATS WIDGETS IN PROFILE PAGE(account.html)
      # Calculating last 7 days range
     today = datetime.now().date()
