@@ -7,6 +7,7 @@ from app.models import db, UserDetails, User
 from flask import jsonify
 from app.models import db, User, ExerciseType, ActivityData, SharedContent
 from functools import wraps
+from sqlalchemy.sql import func
 import random # for generating random strings (Activity_id)
 import string # for generating random strings (Activity_id)
 import random, json
@@ -17,6 +18,10 @@ main = Blueprint('main', __name__)
 @main.route('/')
 def home():
     return render_template('login.html')
+
+@main.route('/dashboard')
+def dashboard():
+    return render_template('health_data.html')
         
 @main.route('/register', methods=['POST'])
 def register():
@@ -107,6 +112,8 @@ def save_profile():
     dob_str = request.form.get('dob')
     weight = request.form.get('weight')
     height = request.form.get('height')
+    allergies = request.form.get('allergies')
+    medications = request.form.get('medications')
 
     try:
         dob = datetime.strptime(dob_str, "%Y-%m-%d").date()
@@ -119,23 +126,83 @@ def save_profile():
             blood_group=blood_group,
             dob=dob,
             weight=float(weight),
-            height=float(height)
+            height=float(height),
+            allergies=allergies,
+            medications=medications
         )
 
         db.session.add(user_details)
         db.session.commit()
         session.pop('registered_username', None)
 
-        flash("Profile updated successfully!", "success")
-        return redirect(url_for('main.health_data'))
+        session.pop('registered_username', None)
+        flash("Profile updated successfully! Please log in using your new credentials.", "info")
+        return redirect(url_for('main.home'))
     except Exception as e:
         flash(f"Error saving profile: {e}", "error")
         return redirect(url_for('main.edit_profile'))
 #end of the profile page logic
 
 @main.route('/account')
+@login_required
 def account():
-    return render_template('account.html')
+    username = session['username']
+    user = UserDetails.query.filter_by(username=username).first()
+
+    if not user:
+        flash("User profile not found.", "error")
+        return redirect(url_for('main.home'))
+#FOR STATS WIDGETS IN PROFILE PAGE(account.html)
+     # Calculating last 7 days range
+    today = datetime.now().date()
+    last_week = today - timedelta(days=6)
+
+    # Fetching activity stats for the last week
+    activities = db.session.query(
+        ActivityData.duration_minutes,
+        ActivityData.calories_burnt,
+        ActivityData.date,
+        ExerciseType.name
+    ).join(ExerciseType).filter(
+        ActivityData.username == username,
+        func.DATE(ActivityData.date) >= last_week
+    ).all()
+
+    total_calories = sum(a.calories_burnt for a in activities)
+    total_duration = sum(a.duration_minutes for a in activities)
+    
+    def calculate_age(dob):
+        today = datetime.today()
+        return today.year - dob.year - ((today.month, today.day) < (dob.month, dob.day))
+
+    age = calculate_age(user.dob)
+
+    # Group by date for daily average calculation
+    days = {a.date for a in activities}
+    avg_daily_active_time = round(total_duration / len(days), 1) if days else 0
+    avg_weekly_calories = round(total_calories, 1)
+
+    # Find all activities with the highest duration
+    activity_duration_map = {}
+    for a in activities:
+        activity_duration_map[a.name] = activity_duration_map.get(a.name, 0) + a.duration_minutes
+
+    if activity_duration_map:
+        max_duration = max(activity_duration_map.values())
+        top_activities = [name for name, dur in activity_duration_map.items() if dur == max_duration]
+        activity_of_week = ', '.join(top_activities)
+    else:
+        activity_of_week = "N/A"
+
+    return render_template(
+        'account.html',
+        user=user,
+        avg_calories=avg_weekly_calories,
+        avg_active_time=avg_daily_active_time,
+        activity_of_week=activity_of_week,
+        age=age
+    )
+
 
 # Protecting routes that need authentication by adding @login_required
 @main.route('/upload')
