@@ -13,17 +13,29 @@ body {
   position: relative;
 }
 
+/* Background setup */
 body::before {
   content: "";
   position: fixed;
   top: 0;
   left: 0;
-  height: 100%;
   width: 100%;
-  background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTNVuXF1OiwvtcwFdeOVzlkhPxYGCIsRaGkg&s') no-repeat center center fixed;
+  height: 100%;
+  background-image: url('https://static.vecteezy.com/system/resources/previews/049/508/425/non_2x/a-highquality-camera-captures-vibrant-scenes-in-a-modern-television-studio-filled-with-colorful-lights-and-a-dynamic-atmosphere-photo.jpg');
   background-size: cover;
-  opacity: 1;
-  filter: blur(5px);
+  background-position: center;
+  opacity: 0.6;
+  z-index: -2;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(0,0,0,0.9) 0%, rgba(40,40,40,0.8) 100%);
   z-index: -1;
 }
 
@@ -152,20 +164,6 @@ p {
   padding-bottom: 40px;
 }
 
-.account-image-button {
-  width: 120px;
-  height: auto;
-  border-radius: 20px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.3);
-  cursor: pointer;
-}
-
-.account-image-button:hover {
-  transform: scale(1.1);
-  box-shadow: 0 6px 12px rgba(0, 255, 200, 0.4);
-}
-
 .gallery-heading {
   text-align: center;
   color: #fff;
@@ -194,4 +192,23 @@ p {
 
 .image-gallery img:hover {
   transform: scale(1.03);
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+    padding: 16px;
+}
+
+.gallery img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.gallery img:hover {
+    transform: scale(1.05);
 }
