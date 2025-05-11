@@ -23,9 +23,9 @@ def home():
 def dashboard():
     return render_template('health_data.html')
 
-@main.route('/video')
-def video():
-    return render_template('video.html')
+@main.route('/gallery')
+def gallery():
+    return render_template('gallery.html')
         
 @main.route('/register', methods=['POST'])
 def register():
