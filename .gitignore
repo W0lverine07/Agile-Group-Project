@@ -1,0 +1,19 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+**/__pycache__/
+
+# Mac OS specific files
+.DS_Store
+**/.DS_Store
+
+# Environment directories
+.env
+.venv
+env/
+venv/
+ENV/
+
+# Migrations (optional, depending on your workflow)
+# migrations/

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>User Profile | Wellness Tracker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles_account.css') }}"/>
+    <!-- Font Awesome for the icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+<!-- Animated background - Red particles -->
+<div class="particles"></div>
+<div class="blur-bg"></div>
+
+<header>
+    <a href="{{ url_for('main.home') }}" class="logo-link">
+        <img src="https://static.vecteezy.com/system/resources/previews/013/547/909/non_2x/smartwatch-logo-design-watch-combine-with-bulb-logo-design-modern-concept-vector.jpg"
+             alt="Wellness Tracker Logo" class="logo">
+        <h1>Wellness Tracker</h1>
+    </a>
+    <div class="nav-buttons">
+        <a href="{{ url_for('main.dashboard') }}"><button><i class="fas fa-chart-line"></i> Dashboard</button></a>
+        <a href="{{ url_for('main.faqs') }}"><button><i class="fas fa-question-circle"></i> FAQ's</button></a>
+        <a href="{{ url_for('main.history') }}"><button><i class="fas fa-history"></i> History</button></a>
+    </div>
+</header>
+
+<main>
+    <div class="profile-container">
+        <!-- Profile view - card format (Glassmorphism) -->
+        <div class="profile-card">
+            <div class="profile-header">
+                <div class="avatar" style="background-color: rgba(255, 62, 62, 0.2);">
+                    <i class="fas fa-user" style="color: #FF3E3E;"></i>
+                </div>
+                <h2>{{ user.first_name }} {{ user.last_name }}</h2>
+                <p class="email">{{ user.email }}</p>
+            </div>
+
+            <div class="profile-details">
+                <div class="detail-group">
+                    <span class="detail-label"><i class="fas fa-user-tag"></i> Username</span>
+                    <span class="detail-value">{{ user.username }}</span>
+                </div>
+                <div class="detail-group">
+                    <span class="detail-label"><i class="fas fa-tint"></i> Blood Group</span>
+                    <span class="detail-value">{{ user.blood_group }}</span>
+                </div>
+                <div class="detail-group">
+                    <span class="detail-label"><i class="fas fa-birthday-cake"></i> Date of Birth</span>
+                    <span class="detail-value">{{ user.dob.strftime('%Y-%m-%d') }}</span>
+                </div>
+                <div class="detail-group">
+                    <span class="detail-label"><i class="fas fa-hourglass-half"></i> Age</span>
+                    <span class="detail-value">{{ age }} years</span>
+                </div>
+                <div class="detail-group">
+                    <span class="detail-label"><i class="fas fa-weight"></i> Weight</span>
+                    <span class="detail-value">{{ user.weight }} kg</span>
+                </div>
+                <div class="detail-group">
+                    <span class="detail-label"><i class="fas fa-ruler-vertical"></i> Height</span>
+                    <span class="detail-value">{{ user.height }} cm</span>
+                </div>
+                <!-- Full-width Allergies -->
+                <div class="detail-group full-width vertical-layout">
+                    <span class="detail-label"><i class="fas fa-hand-holding-medical"></i> Allergies</span>
+                    <div class="detail-value multi-line">{{ user.allergies or 'None' }}</div>
+                </div>
+
+                <!-- Full-width Medications -->
+                <div class="detail-group full-width vertical-layout">
+                    <span class="detail-label"><i class="fas fa-capsules"></i> Medications</span>
+                    <div class="detail-value multi-line">{{ user.medications or 'None' }}</div>
+                </div>
+            </div>
+
+            <button class="edit-btn"><i class="fas fa-edit"></i> Edit Profile</button>
+        </div>
+
+        <!-- Stats Widgets -->
+        <div class="stats-grid">
+            <div class="stat-card">
+            <i class="fas fa-fire" style="color: #FF3E3E;"></i>
+            <h3>Avg Weekly Calories</h3>
+            <p>{{ avg_calories }} <span>kcal</span></p>
+            </div>
+            <div class="stat-card">
+            <i class="fas fa-clock" style="color: #FF3E3E;"></i>
+            <h3>Daily Active Time</h3>
+            <p>{{ avg_active_time }} <span>mins</span></p>
+            </div>
+            <div class="stat-card">
+            <i class="fas fa-star" style="color: #FF3E3E;"></i>
+            <h3>Activity of the Week</h3>
+            <p>{{ activity_of_week }}</p>
+             </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>
