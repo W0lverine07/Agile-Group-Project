@@ -17,7 +17,7 @@ main = Blueprint('main', __name__)
 
 @main.route('/')
 def home():
-    return render_template('login.html')
+    return render_template('index.html')
 
 @main.route('/dashboard')
 def dashboard():
@@ -57,20 +57,21 @@ def check_username():
     exists = User.query.filter_by(username=username).first() is not None
     return jsonify({'exists': exists})
 
-@main.route('/login', methods=['POST'])
+@main.route('/login', methods=['GET', 'POST'])
 def login():
-    username = request.form.get('username')
-    password = request.form.get('password')
+    if request.method == 'POST':
+        username = request.form.get('username')
+        password = request.form.get('password')
 
-    user = User.query.filter_by(username=username).first()
-    if user and check_password_hash(user.password_hash, password):
-        session['username'] = username  # Only store username in session not user_id
-        session['logged_in'] = True
-        flash("Login successful!", "success")
-        return redirect(url_for('main.health_data'))
-    else:
-        flash("Invalid username or password", "error")
-        return redirect(url_for('main.home'))
+        user = User.query.filter_by(username=username).first()
+        if user and check_password_hash(user.password_hash, password):
+            flash("Login successful!", "success")
+            return redirect(url_for('main.account'))
+        else:
+            flash("Invalid username or password", "error")
+            return redirect(url_for('main.home'))
+
+    return render_template('login.html')
 
 @main.route('/logout')
 def logout():
