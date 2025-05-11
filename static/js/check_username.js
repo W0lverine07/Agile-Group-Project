@@ -69,12 +69,26 @@ $(document).ready(function() {
         }, 500); // Adjust delay as necessary
     });
 
-    // FLASH MESSAGE ALERT
+    // FLASH MESSAGE ALERT (auto-dismiss after 4 seconds)
     const flashElem = document.getElementById('flash-messages');
     if (flashElem) {
         const flashMessages = JSON.parse(flashElem.textContent || '[]');
+
+        const container = document.createElement('div');
+        container.classList.add('flash-messages');
+        document.body.appendChild(container);
+
         flashMessages.forEach(([category, message]) => {
+            const msgDiv = document.createElement('div');
+            msgDiv.className = `flash-message ${category}`;
+            msgDiv.textContent = message;
+            container.appendChild(msgDiv);
         });
+
+        // Automatically remove after 4 seconds
+        setTimeout(() => {
+            container.remove();
+        }, 4000);
     }
 
     // TERMS/PRIVACY MODAL HANDLER (moved out of DOMContentLoaded)

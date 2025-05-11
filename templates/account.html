@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>User Profile | Wellness Tracker</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles_account.css') }}"/>
-    <!-- Font Awesome for icons -->
+    <!-- Font Awesome for the icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-<!-- Animated Red Particles Background -->
+<!-- Animated background - Red particles -->
 <div class="particles"></div>
 <div class="blur-bg"></div>
 
@@ -28,7 +28,7 @@
 
 <main>
     <div class="profile-container">
-        <!-- Profile Card (Glassmorphism) -->
+        <!-- Profile view - card format (Glassmorphism) -->
         <div class="profile-card">
             <div class="profile-header">
                 <div class="avatar" style="background-color: rgba(255, 62, 62, 0.2);">
@@ -52,12 +52,27 @@
                     <span class="detail-value">{{ user.dob.strftime('%Y-%m-%d') }}</span>
                 </div>
                 <div class="detail-group">
+                    <span class="detail-label"><i class="fas fa-hourglass-half"></i> Age</span>
+                    <span class="detail-value">{{ age }} years</span>
+                </div>
+                <div class="detail-group">
                     <span class="detail-label"><i class="fas fa-weight"></i> Weight</span>
                     <span class="detail-value">{{ user.weight }} kg</span>
                 </div>
                 <div class="detail-group">
                     <span class="detail-label"><i class="fas fa-ruler-vertical"></i> Height</span>
                     <span class="detail-value">{{ user.height }} cm</span>
+                </div>
+                <!-- Full-width Allergies -->
+                <div class="detail-group full-width vertical-layout">
+                    <span class="detail-label"><i class="fas fa-hand-holding-medical"></i> Allergies</span>
+                    <div class="detail-value multi-line">{{ user.allergies or 'None' }}</div>
+                </div>
+
+                <!-- Full-width Medications -->
+                <div class="detail-group full-width vertical-layout">
+                    <span class="detail-label"><i class="fas fa-capsules"></i> Medications</span>
+                    <div class="detail-value multi-line">{{ user.medications or 'None' }}</div>
                 </div>
             </div>
 
@@ -67,20 +82,20 @@
         <!-- Stats Widgets -->
         <div class="stats-grid">
             <div class="stat-card">
-                <i class="fas fa-heartbeat" style="color: #FF3E3E;"></i>
-                <h3>Heart Rate</h3>
-                <p>72 <span>bpm</span></p>
+            <i class="fas fa-fire" style="color: #FF3E3E;"></i>
+            <h3>Avg Weekly Calories</h3>
+            <p>{{ avg_calories }} <span>kcal</span></p>
             </div>
             <div class="stat-card">
-                <i class="fas fa-fire" style="color: #FF3E3E;"></i>
-                <h3>Calories</h3>
-                <p>1,240 <span>kcal</span></p>
+            <i class="fas fa-clock" style="color: #FF3E3E;"></i>
+            <h3>Daily Active Time</h3>
+            <p>{{ avg_active_time }} <span>mins</span></p>
             </div>
             <div class="stat-card">
-                <i class="fas fa-walking" style="color: #FF3E3E;"></i>
-                <h3>Steps</h3>
-                <p>8,542 <span>today</span></p>
-            </div>
+            <i class="fas fa-star" style="color: #FF3E3E;"></i>
+            <h3>Activity of the Week</h3>
+            <p>{{ activity_of_week }}</p>
+             </div>
         </div>
     </div>
 </main>

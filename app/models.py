@@ -24,6 +24,10 @@ class UserDetails(db.Model):
     dob = db.Column(db.Date, nullable=False) # Date of Birth
     weight = db.Column(db.Float, nullable=False)
     height = db.Column(db.Float, nullable=False)
+    
+    # New fields  for profile
+    allergies = db.Column(db.Text, nullable=True)
+    medications = db.Column(db.Text, nullable=True)
 
 class ExerciseType(db.Model):
     __tablename__ = 'exercise_types'
