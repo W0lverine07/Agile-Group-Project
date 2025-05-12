@@ -19,9 +19,6 @@ main = Blueprint('main', __name__)
 def home():
     return render_template('index.html')
 
-@main.route('/dashboard')
-def dashboard():
-    return render_template('health_data.html')
 
 @main.route('/gallery')
 def gallery():
@@ -149,6 +146,11 @@ def save_profile():
         flash(f"Error saving profile: {e}", "error")
         return redirect(url_for('main.edit_profile'))
 #end of the profile page logic
+
+@main.route('/dashboard')
+@login_required
+def dashboard():
+    return render_template('health_data.html')
 
 @main.route('/account')
 @login_required
@@ -395,6 +397,7 @@ def share_page():
     return render_template('share_page.html')
 
 @main.route('/health_data', methods=['POST', 'GET'])
+@login_required
 def health_data():
     return render_template('health_data.html')
 
@@ -467,4 +470,3 @@ def faqs():
 @main.route('/history')
 def history():
     return render_template('history.html')
-

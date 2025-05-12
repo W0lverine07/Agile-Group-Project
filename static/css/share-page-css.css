@@ -20,24 +20,41 @@ body::before {
   left: 0;
   height: 100%;
   width: 100%;
-  background: url('https://images.unsplash.com/photo-1571019613913-37b9f1d6e3b6') no-repeat center center fixed;
+  background: url('https://miro.medium.com/v2/resize:fit:1400/0*1yBU4t9o0Oma_-3c.gif') no-repeat center center fixed;
   background-size: cover;
   opacity: 1;
-  filter: blur(6px);
+  filter: blur(5px);
+  z-index: -1;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(0,0,0,0.9) 0%, rgba(40,40,40,0.8) 100%);
   z-index: -1;
 }
 
 header {
-  background-color: rgba(0, 0, 0, 0.6);
-  padding: 15px 30px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 1.5rem 2rem;
+  position: relative;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 1px 15px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
 header h1 {
   font-size: 24px;
-  color: white;
 }
 
 .nav-buttons button {
@@ -61,11 +78,13 @@ header h1 {
   width: auto;
   border-radius: 8px;
   margin-right: 15px;
+  vertical-align: middle;
 }
 
 .logo-link {
   display: flex;
   align-items: center;
+  margin-right: 15px;
   text-decoration: none;
 }
 
