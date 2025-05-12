@@ -1,0 +1,324 @@
+/* Reset & base setup */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #000;
+  color: #fff;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Background setup */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('https://images.unsplash.com/photo-1571019613914-85f342c6a11e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.6;
+  z-index: -2;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(0,0,0,0.9) 0%, rgba(40,40,40,0.8) 100%);
+  z-index: -1;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  position: relative;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 1px 15px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+header h1 {
+  font-size: 24px;
+}
+
+.left-header {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Optional spacing between logo and h1 */
+}
+
+.left-header h1 {
+  text-align: left;
+}
+
+.nav-buttons button {
+  background-color: #ff0000;
+  border: none;
+  color: white;
+  padding: 10px 18px;
+  margin-left: 10px;
+  font-size: 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.nav-buttons button:hover {
+  background-color: #16a085;
+}
+
+.logo {
+  height: 50px;
+  width: auto;
+  border-radius: 8px;
+  margin-right: 15px;
+  vertical-align: middle;
+}
+
+.logo-link {
+  display: flex;
+  align-items: center;
+  margin-right: 15px;
+  text-decoration: none;
+}
+
+.nav-links a {
+  margin-left: 20px;
+  text-decoration: none;
+  color: #ff0000;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #16a085;
+}
+
+/* Auth Container */
+.auth-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+/* Auth Card (Form section) */
+.auth-card {
+  background: rgba(0, 0, 0, 0.75);
+  padding: 30px;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 400px;
+  margin: 20px;
+  box-shadow: 0 4px 15px rgba(255,255,255,0.15);
+}
+
+.form-switcher {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.switch-btn {
+  flex: 1;
+  padding: 10px;
+  background-color: #333;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.switch-btn.active {
+  background-color: #ff0000;
+}
+
+.switch-btn:hover:not(.active) {
+  background-color: #444;
+}
+
+.form-container {
+  display: block;
+}
+
+.form-container.hidden {
+  display: none;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  background-color: #222;
+  margin: 10px 0;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.input-icon {
+  margin-right: 10px;
+  color: #ff0000;
+}
+
+input[type="text"],
+input[type="password"] {
+  flex: 1;
+  border: none;
+  background: transparent;
+  color: #fff;
+  font-size: 1rem;
+  outline: none;
+}
+
+/* Forgot password */
+.forgot-password {
+  display: block;
+  text-align: right;
+  font-size: 0.85rem;
+  color: #ccc;
+  margin-top: 5px;
+  text-decoration: none;
+}
+
+.forgot-password:hover {
+  color: #ff0000;
+}
+
+/* Submit Button */
+.submit-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #ff0000;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-top: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.submit-btn:hover {
+  background-color: #16a085;
+  transform: scale(1.03);
+}
+
+.submit-btn i {
+  margin-left: 10px;
+}
+
+/* Checkbox & Terms */
+.checkbox-container {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 15px;
+  color: #ccc;
+  font-size: 0.9rem;
+}
+
+.checkbox-container input {
+  margin-right: 10px;
+}
+
+.checkbox-container a {
+  color: #ff0000;
+  text-decoration: none;
+}
+
+.checkbox-container a:hover {
+  text-decoration: underline;
+}
+
+/* Features */
+.features {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.feature {
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 15px;
+  padding: 20px;
+  margin: 10px;
+  width: 250px;
+  text-align: center;
+  box-shadow: 0 3px 12px rgba(255, 255, 255, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.feature:hover {
+  transform: translateY(-5px);
+}
+
+.feature-icon {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  color: #ff0000;
+}
+
+.feature h3 {
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+}
+
+.feature p {
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+/* Flash messages */
+.flash-messages {
+  margin: 20px auto;
+  max-width: 600px;
+  padding: 10px;
+}
+
+.flash-message {
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+.flash-message.error {
+  background-color: #ff4d4d;
+  color: white;
+}
+
+.flash-message.success {
+  background-color: #16a085;
+  color: white;
+}
+
+/* Feedback text */
+.feedback-text {
+  font-size: 0.8rem;
+  color: #ff4d4d;
+  margin-top: -8px;
+  margin-bottom: 8px;
+}

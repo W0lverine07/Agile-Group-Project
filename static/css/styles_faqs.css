@@ -1,0 +1,174 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Base Styles */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #000;
+  color: #fff;
+  margin: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Background setup */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('https://img.freepik.com/premium-photo/faq-banner-design-question-mark-sign-banner-3d-rendering_118019-2153.jpg');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.6;
+  z-index: -2;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(0,0,0,0.9) 0%, rgba(40,40,40,0.8) 100%);
+  z-index: -1;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  position: relative;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 1px 15px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+header h1 {
+  font-size: 24px;
+}
+.left-header {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Optional spacing between logo and h1 */
+}
+
+.left-header h1 {
+  text-align: left;
+}
+
+.nav-buttons button {
+  background-color: #ff0000;
+  border: none;
+  color: white;
+  padding: 10px 18px;
+  margin-left: 10px;
+  font-size: 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.nav-buttons button:hover {
+  background-color: #16a085;
+}
+
+/* Logo */
+.logo-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.logo {
+  height: 50px;
+  width: auto;
+  border-radius: 8px;
+  margin-right: 12px;
+}
+
+/* Main Content */
+.content {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  text-align: center;
+}
+
+.content h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+/* FAQ Section */
+.faq {
+  background-color: rgba(0, 0, 0, 0.65);
+  border-left: 4px solid #e63946;
+  padding: 1rem 1.2rem;
+  margin-bottom: 1.5rem;
+  border-radius: 8px;
+  text-align: left;
+}
+
+.faq h3 {
+  font-size: 1.2rem;
+  color: #e63946;
+  margin-top: 0;
+}
+
+.faq p {
+  font-size: 1rem;
+  color: #eee;
+  line-height: 1.6;
+  margin: 0.5rem 0 0;
+}
+
+/* Focus & Accessibility */
+a:focus,
+button:focus {
+  outline: 2px solid #16a085;
+  outline-offset: 2px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .nav-buttons {
+    width: 100%;
+    justify-content: flex-start;
+    margin-top: 1rem;
+  }
+
+  .nav-buttons a {
+    flex: 1 1 auto;
+    text-align: center;
+  }
+
+  .content h2 {
+    font-size: 1.6rem;
+  }
+
+  .faq h3 {
+    font-size: 1.1rem;
+  }
+
+  .faq p {
+    font-size: 0.95rem;
+  }
+}
