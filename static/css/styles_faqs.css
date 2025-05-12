@@ -1,3 +1,9 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 /* Base Styles */
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -9,31 +15,65 @@ body {
   position: relative;
 }
 
+/* Background setup */
 body::before {
   content: "";
   position: fixed;
-  inset: 0;
-  background: url('https://example.com/your-image.jpg') no-repeat center center fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('https://img.freepik.com/premium-photo/faq-banner-design-question-mark-sign-banner-3d-rendering_118019-2153.jpg');
   background-size: cover;
-  filter: blur(5px);
-  opacity: 0.9;
+  background-position: center;
+  opacity: 0.6;
+  z-index: -2;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(0,0,0,0.9) 0%, rgba(40,40,40,0.8) 100%);
   z-index: -1;
 }
 
-/* Header */
 header {
-  background-color: rgba(0, 0, 0, 0.7);
-  padding: 1rem 2rem;
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  position: relative;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 1px 15px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
 header h1 {
-  font-size: 1.8rem;
-  margin: 0;
-  color: #fff;
+  font-size: 24px;
+}
+
+.nav-buttons button {
+  background-color: #ff0000;
+  border: none;
+  color: white;
+  padding: 10px 18px;
+  margin-left: 10px;
+  font-size: 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.nav-buttons button:hover {
+  background-color: #16a085;
 }
 
 /* Logo */
@@ -48,29 +88,6 @@ header h1 {
   width: auto;
   border-radius: 8px;
   margin-right: 12px;
-}
-
-/* Navigation */
-.nav-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.nav-buttons a {
-  text-decoration: none;
-  background-color: #e63946;
-  color: #fff;
-  padding: 0.6rem 1.2rem;
-  border-radius: 6px;
-  font-size: 0.9rem;
-  transition: background-color 0.3s ease;
-}
-
-.nav-buttons a:hover,
-.nav-buttons a:focus {
-  background-color: #16a085;
-  outline: none;
 }
 
 /* Main Content */

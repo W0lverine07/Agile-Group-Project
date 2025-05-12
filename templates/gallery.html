@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <title>Video Guide</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/gallery.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+<body>
 <header>
     <a href="{{ url_for('main.home') }}" class="logo-link">
         <img src="https://static.vecteezy.com/system/resources/previews/013/547/909/non_2x/smartwatch-logo-design-watch-combine-with-bulb-logo-design-modern-concept-vector.jpg"
@@ -12,15 +14,10 @@
     </a>
     <h1>Wellness Tracker</h1>
     <div class="nav-buttons">
-        <a href="{{ url_for('main.login') }}">
-            <button>Login</button>
-        </a>
-        <a href="{{ url_for('main.faqs') }}">
-            <button>FAQ's</button>
-        </a>
-        <a href="{{ url_for('main.history') }}">
-            <button>History</button>
-        </a>
+        <a href="{{ url_for('main.home') }}"><button><i class="fas fa-house"></i> Home Page</button></a>
+        <a href="{{ url_for('main.login') }}"><button><i class="fas fa-circle-user"></i> Login</button></a>
+        <a href="{{ url_for('main.faqs') }}"><button><i class="fas fa-question-circle"></i> FAQ's</button></a>
+        <a href="{{ url_for('main.history') }}"><button><i class="fas fa-history"></i> History</button></a>
     </div>
 </header>
 

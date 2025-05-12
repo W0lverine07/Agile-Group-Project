@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FAQs</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles_faqs.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
   <header>
@@ -14,15 +15,10 @@
     </a>
     <h1>Wellness Tracker</h1>
     <div class="nav-buttons">
-        <a href="{{ url_for('main.account') }}">
-            <button>Account</button>
-        </a>
-        <a href="{{ url_for('main.faqs') }}">
-            <button>FAQ's</button>
-        </a>
-        <a href="{{ url_for('main.history') }}">
-            <button>History</button>
-        </a>
+        <a href="{{ url_for('main.home') }}"><button><i class="fas fa-house"></i> Home Page</button></a>
+        <a href="{{ url_for('main.login') }}"><button><i class="fas fa-circle-user"></i> Login</button></a>
+        <a href="{{ url_for('main.gallery') }}"><button><i class="fas fa-image"></i> Gallery</button></a>
+        <a href="{{ url_for('main.history') }}"><button><i class="fas fa-history"></i> History</button></a>
     </div>
   </header>
 
