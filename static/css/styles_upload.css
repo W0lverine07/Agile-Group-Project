@@ -56,6 +56,15 @@ header {
 header h1 {
   font-size: 24px;
 }
+.left-header {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Optional spacing between logo and h1 */
+}
+
+.left-header h1 {
+  text-align: left;
+}
 
 .logo {
   height: 50px;
