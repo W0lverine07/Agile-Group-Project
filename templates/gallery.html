@@ -8,11 +8,13 @@
 </head>
 <body>
 <header>
+    <div class="left-header">
     <a href="{{ url_for('main.home') }}" class="logo-link">
-        <img src="https://static.vecteezy.com/system/resources/previews/013/547/909/non_2x/smartwatch-logo-design-watch-combine-with-bulb-logo-design-modern-concept-vector.jpg"
+        <img src="https://i.pinimg.com/originals/6d/e1/7f/6de17f9493638040838c12f4c947365b.gif"
              alt="Wellness Tracker Logo" class="logo">
     </a>
     <h1>Wellness Tracker</h1>
+    </div>
     <div class="nav-buttons">
         <a href="{{ url_for('main.home') }}"><button><i class="fas fa-house"></i> Home Page</button></a>
         <a href="{{ url_for('main.login') }}"><button><i class="fas fa-circle-user"></i> Login</button></a>
@@ -32,20 +34,79 @@ referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
 
 <h2 class="gallery-heading">Image Gallery</h2>
 <div class="gallery">
-    <img src="https://i.imgur.com/gG1I2cH.png" alt="Image 1">
-    <img src="https://i.imgur.com/hQZCEpn.png" alt="Image 2">
-    <img src="https://i.imgur.com/8B1E20H.png" alt="Image 3">
-    <img src="https://i.imgur.com/1WP1tJP.png" alt="Image 4">
-    <img src="https://i.imgur.com/osn9RjN.png" alt="Image 5">
-    <img src="https://i.imgur.com/CgNwlS8.png" alt="Image 6">
-    <img src="https://i.imgur.com/L3yKXKc.png" alt="Image 7">
-    <img src="https://i.imgur.com/q8DcrjI.png" alt="Image 8">
-    <img src="https://i.imgur.com/dhtJt2z.png" alt="Image 9">
-    <img src="https://i.imgur.com/V4O53mL.png" alt="Image 10">
-    <img src="https://i.imgur.com/fGQZUqQ.png" alt="Image 11">
-    
+<img src="https://media-hosting.imagekit.io/6dab4b9c84f046fc/Screenshot%202025-05-12%20161342.png?Expires=1841645753&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=j3sFR3zFLZyIYePxSqZNvBb8YyOAW6A5WKew~yXT8DQLTcwmGXBb5QIF73YNXVmYB3SKU58dhAvW5CBTCpjNXyzDK-Ct~Vt0d6uRVWQugbNT8RS11E5cx7DFiiFl-5d1CkvsTdeq37ZuM1cHuOpF6zH4OIacPIs5onlPVNlIQC0XGXzXvylI-hoYdHBC9jMVOpAMLsHjHiJPXA2ur53TyROERqpzuRtqDVoVD9U548LbgQHdhC8vxpHXx9pq1IINYGOPrzD5RgDUPT1OiBjoPuU0U3awqhmnHSC754VybA7AWzu1ZuOjr3Da~6WJJ1buhoEXITPBVSonIQIjZDajaA__"
+       alt="Gallery Image"
+       class="thumbnail"
+       onclick="openImage(this.src)">
+
+<img src="https://media-hosting.imagekit.io/fced465411fc4e8c/Screenshot%202025-05-12%20161322.png?Expires=1841645753&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=S-fEnSuNuGHMrms44OqQ8OC3ZU5Af1yDwCQ9UJ2nT7GzemJm2zRop3RPXsm2rdPH2I1L-dBieLI9WdJMTpmBS9UPXJBxrboo9lv8IbK~cZp2k1x8u-kfrM0fYsgdvPHi1b1z7IYjvHrDfG05Q0kklX~YgYhtn8X~W6~fF-lk0w-sFEteh8Sm2eCjHi~K632ppWZunoNBVdH8h-zblrQqh67z5KFQjn2~rKWBlLUk1bwqP3qVef9F5rpbV~ft-Y7qUPV0qndpijlDPoKs10HfD2HtROuNpTYaZtGdC1K~yqOmUwOwn36oV7A~DEKGcILOmgzz2OwCPKggWx3pBqYfjQ__"
+       alt="Gallery Image"
+       class="thumbnail"
+       onclick="openImage(this.src)">
+
+<img src="https://media-hosting.imagekit.io/77fa74808d5b4ef0/Screenshot%202025-05-12%20161333.png?Expires=1841645753&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=zCL3iExdoky4Z2M9YlH5jhjk5LZs7nQEEP7pT3wF6yx1qpXCuCDs6VIqZiuwEcc3JCw~mKD9MNRoeTfR6lC98VcmrL59I9HhVf4QbjoFcrlE02Uv2Mfej5nmfcHrEzA-SMJPSkel6b32D~N4VLBXrq8MfA7k8kLCWsVMVWEo7qTJIzN4UimfeV1~PQxghxnoZAvKSF~bVCsqU9FBl~0BI9xxcicU0y7bsxni~r0dGD3aay-Rf88IKHFG9k~p9E4HefN-c~tNWWNpezQNLAXgl8Y4M2tbtTi2ywt4yjDC8qYmsxYFf~zdlQMg4sgmK79GKfblEZsR6QOu~Mc5q6fgkg__"
+       alt="Gallery Image"
+       class="thumbnail"
+       onclick="openImage(this.src)">
+
+    <img src="https://media-hosting.imagekit.io/7a07980ee5bf4c2e/Screenshot%202025-05-12%20161311.png?Expires=1841645753&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=PcPemCXjjjcIJuYALq6qHJFVKdB-lFesvMwX7GCYFy5ACiSUnHYxGVmTdr3y9B0tjTNNbiIiE0oTFF-dGLDdzMSoTaq0~r-68LcpbuNNwq0zJokIPN22q5cguenbPxIxY6IoooWE0Ec5TvfY00NbkO-D1Kuoa6i8e4s4mdYyJE~hXqPaW-DCyX4E5QxVU9gbec17HyoCHORT4IPVd2~vtCPfoulD2VRIvuJSaZStynbRQDg0M~AbH0YcgY8BHuOY9cjwiFUf~Ng3tlKgA7nZfB8WJGk9noszprfQzqi3XEDnfoOIdjJHmumnx6VvJxGetJfQs54Js3zQzPji5b-eZQ__"
+       alt="Gallery Image"
+       class="thumbnail"
+       onclick="openImage(this.src)">
+
+    <img src="https://media-hosting.imagekit.io/4664d62bd18f4064/Screenshot%202025-05-12%20161508.png?Expires=1841645753&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=olHCEjLAFWOsvSisrWo43sc63FrTjxc4u0B6JsTwMl1vpZNbeRCxdfBacf1iNzZIzyfE5YEprxIIMAkpRI~ZElDcvGvneaT~qaBBojsOZGPjzwQ-j6QLD~eBkd0gB~iYB7jjeSI8AjCBdcF9N0Igp5-PjhfLUuQdPdxbOsJ1GkotO-QDyR~tY9MD6d8NYXYhHLZQKhsuFfgmS2dJ8YNt0D94FlSJdp1jYcNsxFi1dZniXodbDuYsMQR93IGBStci6FZJvcqEnvvEF6iNypYSPKEXnJBZTQ2Qjof6XLBIXnPASOTndBy3BFsdGUSJ7CcNYz7KwbLTqUL7rxrxwwia5A__"
+       alt="Gallery Image"
+       class="thumbnail"
+       onclick="openImage(this.src)">
+
+<img src="https://media-hosting.imagekit.io/60e77ea7f0444893/Screenshot%202025-05-12%20161501.png?Expires=1841645753&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=qSsx1KSoa5aNXyrNkHx458n6jDPmcTmf9wetWSfdwyeD~5sDsX3SAYIj8xPcnFWMbj4wubit68Sdf1fMjQoOG04qzrjcyltGAYg13cyNgS5W3rQPxYLjxAXL-AqlBbQ2swvZNIHfNEmET3-t8MhnlpAn7lGgq0oN4HRBV4GVYVV6d-B2RUJNIbIVyM1sBcWhi94Jt5JabhOWSYGLKo5CKcYfX8rycTfO43P58J1tGbZw-7E~uA3IG4ew7-w3iMxW7m~cZNecRn81Hz-SLaJVh9IrCJNYgjsZ5SUPAwKcaGSXTT09LTPlYz3mWxGP5ArHTTT7Bq~9wPoKKzA~du-m6A__"
+       alt="Gallery Image"
+       class="thumbnail"
+       onclick="openImage(this.src)">
+
+<img src="https://media-hosting.imagekit.io/c4437f48d9f244b5/Screenshot%202025-05-12%20161446.png?Expires=1841645753&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=aJ8LDcXSCvaqRPVNQPAg7eOhjYGsAjLqePWt-lEPTAqKiDvwGX5a0nhJNrEr~J8URU2Ywrw3xI~MrRF24tQNgeWrMoUfLVzOlwuHnIpEFaFg0Dj0Xfi924HEgFEYabyiV2YVIPCmXp2qmGv4WXS30WSCNXs4QbTvlYfbLoGJpEg-18pv~kyBY9xRfAtd29bZiuKQq7lZGP~C~62avlsWoINjaG9D-2-4mwHA3h~3pGt~gi8NLyOhPhckTs6XWea5u9pgprDlPB3Ylfs9PkbrZ6hY~dGiqUkKY2E0d8TsY~1Yheep26326Etf0-yXiMAhlpl8C1dSaMio0qAogKjhLw__"
+       alt="Gallery Image"
+       class="thumbnail"
+       onclick="openImage(this.src)">
+
+<img src="https://media-hosting.imagekit.io/ddeac5d7a7564bad/Screenshot%202025-05-12%20161439.png?Expires=1841645753&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=XIKzVayiW40A3ko8Il3cX1cz5PDpuCuvSNO9To-3xPe8y6kcEiGIqdgvI~mb7Dk0bVYbjdrpsTUZarjLB0lCT~83Pe7U5VnlFwtcxneICl9jrHa1Qm70Qllbre7v2CmwgAr2b8FcrLapYI6feCz0ZT~WZ7Hh4ZcxL42cQrJXXJljUsQG1JBFKwA9AkQ7Wrg0m9CojMfD0vJd3ke6uHPLiPywY3XYx18GEXHAi3efY53vGQ8mf9Gh7d8rv07upLy8pPeLPARIx5UNsJAc0DKdbjsNdj1UdbjLuEfiFBmdznaFS97bwWPD-2I~~WGFDzaS1cWM1LdpPWn42z5xVFmzcw__"
+       alt="Gallery Image"
+       class="thumbnail"
+       onclick="openImage(this.src)">
+
+<img src="https://media-hosting.imagekit.io/8da7b53cbede4b16/Screenshot%202025-05-12%20161427.png?Expires=1841645753&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=fulRlTakbWon-oYfwMZYUwD-PS-cxHag4F2tXBxXrlAakEdyartoczKgVFBrMoytQjPnLshckDn8EGH1WxoELy8zfzmwTNbmVXBQUIlNR4cf3YbsVzbDuxk2NJ6erlhPMECghUSTOx8shbNgIaWTuMckxhKSSvkaJl6PnegqaDi1dwUpbRHtRYARoukbDROtPGtiPcQFRnjN4IceN1ByOog1iXfJp2Mm6mD30MYK0~Ek0e67kwOCG87HOZZ5TnkcCS3cLl5ySuyRHNNbgzaMA~9H2FdXrK-R6AmRjLNHDVGZ0ZUggNP3vw2CdLQvNkiYQFzOoUqMmyEIP-F8yctWDw__"
+       alt="Gallery Image"
+       class="thumbnail"
+       onclick="openImage(this.src)">
+
+<img src="https://media-hosting.imagekit.io/8da7b53cbede4b16/Screenshot%202025-05-12%20161427.png?Expires=1841645753&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=fulRlTakbWon-oYfwMZYUwD-PS-cxHag4F2tXBxXrlAakEdyartoczKgVFBrMoytQjPnLshckDn8EGH1WxoELy8zfzmwTNbmVXBQUIlNR4cf3YbsVzbDuxk2NJ6erlhPMECghUSTOx8shbNgIaWTuMckxhKSSvkaJl6PnegqaDi1dwUpbRHtRYARoukbDROtPGtiPcQFRnjN4IceN1ByOog1iXfJp2Mm6mD30MYK0~Ek0e67kwOCG87HOZZ5TnkcCS3cLl5ySuyRHNNbgzaMA~9H2FdXrK-R6AmRjLNHDVGZ0ZUggNP3vw2CdLQvNkiYQFzOoUqMmyEIP-F8yctWDw__"
+       alt="Gallery Image"
+       class="thumbnail"
+       onclick="openImage(this.src)">
+
+<img src="https://media-hosting.imagekit.io/3b341fb41992451f/Screenshot%202025-05-12%20161422.png?Expires=1841645753&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=QbMRwmLEkfTHxy23EXr-Z~2M7jzMRdPeTdfyp4J7UTeV3HMMV0m5U8le-itnuq041-wjuSUnd16PEBKI688gpaU34uq3lLrWmtnAvGmoFdZMmW1nI-sEOSh~IgTwgZwgU2LPUi~vfm5jSo3MJu7NA89Kz6fLMeDJTd4lnjO42SaMWxGj0wqZrykFyUW4f4jYq6gmieytReMtuVLwJxJnvbcdwJomu7196Go6dt1-7mEx~SApgoS-NWqD-6wJ0fLwyEc-27ofDyA5IM4l0nKk1ACHBKWf47FhdTMH6mT6BM~Acy6GDNZChdd5Mgsj19LTkGOM8oK7Q0~WxHhFi0TSJQ__"
+       alt="Gallery Image"
+       class="thumbnail"
+       onclick="openImage(this.src)">
+
+<img src="https://media-hosting.imagekit.io/cd8ce30b77fe4f7d/Screenshot%202025-05-12%20161412.png?Expires=1841645753&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=DCfZe1mbWZ2x2IRkA0gKPTxW1SVaL9n6W5B8iIvM1zJRxfztrO2GyWxwyzFkxcsfjm8o2nVHis1-A-4By5c7A7b~qQByKceqw7lJ~CVLbGKjkNQqgb-CtM~fFC3qizcmGG7xJw0CNowSKxZbYrMPJ1yUMEcSDBzxN8i8-JRKbuWLKftDunOT3Pxy-s-pk4M1czvvP1Eet47BDnFbBWk92ixnkiqhAvfGGi~qW-LfiK0XvzE1lnu73ith2mn7SgExJ5RKl2WQgOkcwT897S7a28R-QYLNG5d-iLi~zGXM3UPjFtwv2A3h6Fmzik2TE4jjxaoHuGWy7IGmy4AOyrUf-A__"
+       alt="Gallery Image"
+       class="thumbnail"
+       onclick="openImage(this.src)">
+
+<img src="https://media-hosting.imagekit.io/06735ba7478a471c/Screenshot%202025-05-12%20161406.png?Expires=1841645753&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=WqxGYN6QnnqSEWX1ztP6AG3mzIggxHs3k6EFfDRoRr2G6-TkqPqOui7hxznPRLQaqF4afeVRO-7MRhneJ-HDx5y4iI3xkzK5MuceTNmxjqbcjLffcSmgYAZLjNGBAKb84A65JQyVzkn3GvHU2ubuwpZxAafoZMsIPd40F~kQ3QvFUyCl-X~w0a-auowFEh~N9bwesFDae4gSbEXSI7xbW10BvfEcIWVSvLrbJCLtlsFXmYO4Q23-WgOlulrKSVLFN2UJHdrkpfCwgs8fb0jD4AGq0YP-9EqBCrxI9P9TVGazshlfdgfh9Mdbc0l7SL1d5rOJ7ap2r9TZ0ExyOYnQtw__"
+       alt="Gallery Image"
+       class="thumbnail"
+       onclick="openImage(this.src)">
+
+    </div>
+
+<div id="lightbox" onclick="closeImage()">
+  <img id="lightbox-img" src="" alt="Full Image">
 </div>
 
 
+
+<script src="{{ url_for('static', filename='js/gallery.js') }}"></script>
 </body>
 </html>
