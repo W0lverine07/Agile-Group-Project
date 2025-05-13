@@ -54,9 +54,10 @@ def register():
 #start of the check username in database
 @main.route('/check_username', methods=['POST'])
 def check_username():
-    username = request.form.get('username')
+    username = request.get_json().get('username') #issue with checking username
     exists = User.query.filter_by(username=username).first() is not None
-    return jsonify({'exists': exists})
+    return jsonify({'available': not exists})
+#end of the check username in database
 
 @main.route('/login', methods=['GET', 'POST'])
 def login():
@@ -193,14 +194,15 @@ def account():
 
     # Find all activities with the highest duration
     activity_duration_map = {}
-    for a in activities:
-        activity_duration_map[a.name] = activity_duration_map.get(a.name, 0) + a.duration_minutes
+    for duration, calories, date, exercise_name in activities:
+        activity_duration_map[exercise_name] = activity_duration_map.get(exercise_name, 0) + duration
 
     if activity_duration_map:
         max_duration = max(activity_duration_map.values())
         top_activities = [name for name, dur in activity_duration_map.items() if dur == max_duration]
         activity_of_week = ', '.join(top_activities)
     else:
+        top_activities = []
         activity_of_week = "N/A"
 
     return render_template(
@@ -208,9 +210,9 @@ def account():
         user=user,
         avg_calories=avg_weekly_calories,
         avg_active_time=avg_daily_active_time,
-        activity_of_week=activity_of_week,
+        activity_of_week=', '.join(top_activities),
         age=age
-    )
+)
 
 
 # Protecting routes that need authentication by adding @login_required

@@ -11,7 +11,7 @@ $(document).ready(function () {
         }
 
         $.ajax({
-            url: '/check-username',
+            url: '/check_username',
             method: 'POST',
             contentType: 'application/json',
             data: JSON.stringify({ username: username }),
