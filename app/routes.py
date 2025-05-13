@@ -472,3 +472,7 @@ def faqs():
 @main.route('/history')
 def history():
     return render_template('history.html')
+
+@main.route('/contact')
+def contact():
+    return render_template('contact.html')
