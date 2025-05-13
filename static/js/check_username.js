@@ -3,30 +3,36 @@ $(document).ready(function () {
     const usernameInput = $('#username');
     const feedback = $('#username-feedback');
 
-    usernameInput.on('blur', function () {
+    let debounceTimer;
+    usernameInput.on('input', function () {
+        clearTimeout(debounceTimer);
         const username = usernameInput.val().trim();
-        if (username.length < 3) {
-            feedback.text('Username must be at least 3 characters long.').css('color', 'red');
-            return;
-        }
 
-        $.ajax({
-            url: '/check_username',
-            method: 'POST',
-            contentType: 'application/json',
-            data: JSON.stringify({ username: username }),
-            success: function (response) {
-                if (response.available) {
-                    feedback.text('Username is available.').css('color', 'green');
-                } else {
-                    feedback.text('Username is taken.').css('color', 'red');
-                }
-            },
-            error: function () {
-                feedback.text('Error checking username. Please try again.').css('color', 'red');
+        debounceTimer = setTimeout(() => {
+            if (username.length < 3) {
+                feedback.text('Username must be at least 3 characters long.').css('color', 'red');
+                return;
             }
-        });
+
+            $.ajax({
+                url: '/check_username',
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({ username: username }),
+                success: function (response) {
+                    if (response.available) {
+                        feedback.text('Username is available').css('color', 'lightgreen');
+                    } else {
+                        feedback.text('Username is already taken').css('color', 'red');
+                    }
+                },
+                error: function () {
+                    feedback.text('Error checking username. Please try again.').css('color', 'orange');
+                }
+            });
+        }, 300); // runs only after 300ms of no typing
     });
+
 
     // ===== Password Match Check =====
     const password = $('#password');
