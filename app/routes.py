@@ -214,6 +214,33 @@ def account():
         age=age
 )
 
+#FOR EDITING THE PROFILE PAGE
+@main.route('/update_profile', methods=['POST'])
+def update_profile():
+    if 'username' not in session:
+        return jsonify({'success': False, 'error': 'Not logged in'}), 403
+
+    data = request.get_json()
+    weight = data.get('weight')
+    height = data.get('height')
+    allergies = data.get('allergies')
+    medications = data.get('medications')
+
+    username = session['username']
+    user = UserDetails.query.filter_by(username=username).first()
+    if not user:
+        return jsonify({'success': False, 'error': 'User not found'}), 404
+
+    try:
+        user.weight = float(weight)
+        user.height = float(height)
+        user.allergies = allergies
+        user.medications = medications
+        db.session.commit()
+        return jsonify({'success': True})
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)})
+
 
 # Protecting routes that need authentication by adding @login_required
 @main.route('/upload')
