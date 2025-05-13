@@ -310,6 +310,10 @@ input[type="password"] {
   color: white;
 }
 
+.flash-message.info {
+  background-color: #2196f3;
+}
+
 .flash-message.success {
   background-color: #16a085;
   color: white;
