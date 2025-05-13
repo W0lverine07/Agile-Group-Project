@@ -43,27 +43,23 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 1.5rem 2rem;
-  position: relative;
-  z-index: 10;
-  background-color: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 1px 15px rgba(0, 0, 0, 0.1);
   position: sticky;
   top: 0;
   z-index: 100;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 1px 15px rgba(0, 0, 0, 0.1);
 }
 
-header h1 {
-  font-size: 24px;
-}
 .left-header {
   display: flex;
   align-items: center;
-  gap: 10px; /* Optional spacing between logo and h1 */
+  gap: 10px;
 }
 
 .left-header h1 {
   text-align: left;
+  font-size: 24px;
 }
 
 .logo {
@@ -77,13 +73,13 @@ header h1 {
 .logo-link {
   display: flex;
   align-items: center;
-  margin-right: 15px;
   text-decoration: none;
 }
 
 .nav-buttons {
   display: flex;
   gap: 10px;
+  flex-wrap: wrap;
 }
 
 .nav-buttons button {
@@ -91,7 +87,6 @@ header h1 {
   border: none;
   color: white;
   padding: 10px 18px;
-  margin-left: 0;
   font-size: 14px;
   border-radius: 6px;
   cursor: pointer;
@@ -108,18 +103,6 @@ header h1 {
 
 .nav-buttons .logout-btn:hover {
   background-color: #555;
-}
-
-.logo {
-  height: 50px;
-  width: auto;
-  border-radius: 8px;
-}
-
-.logo-link {
-  display: flex;
-  align-items: center;
-  text-decoration: none;
 }
 
 .content {
@@ -209,12 +192,26 @@ form input:focus, form select:focus {
 }
 
 form select {
+  width: 100%;
+  padding: 12px 15px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background-color: #1e1e1e; /* Dark grey background */
+  color: #ff4d4d; /* Light red text */
+  font-size: 16px;
+  transition: all 0.3s ease;
+
+  /* Add this for consistent appearance across browsers */
+  -webkit-appearance: none;
+  -moz-appearance: none;
   appearance: none;
+
   background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
   background-repeat: no-repeat;
   background-position: right 15px center;
   background-size: 15px;
 }
+
 
 form input[readonly] {
   background-color: rgba(255, 255, 255, 0.03);
@@ -418,68 +415,79 @@ form input[readonly] {
   background-color: rgba(255, 255, 255, 0.2);
 }
 
-/* Responsive design */
+/* Responsive Design */
 @media (max-width: 768px) {
   header {
     flex-wrap: wrap;
     gap: 10px;
   }
-  
+
   .logo-link {
     flex-basis: 100%;
     justify-content: center;
     margin-bottom: 10px;
   }
-  
+
   .nav-buttons {
     width: 100%;
     justify-content: center;
-    flex-wrap: wrap;
-  }
-  
-  .nav-buttons button {
-    padding: 8px 12px;
-    font-size: 12px;
-  }
-  
-  .form-actions {
-    flex-direction: column;
-  }
-  
-  .device-selection {
-    grid-template-columns: repeat(2, 1fr);
   }
 }
+.devices-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+  padding: 10px;
+}
 
-@media (max-width: 480px) {
-  .nav-buttons {
-    gap: 5px;
-  }
-  
-  .nav-buttons button {
-    padding: 6px 10px;
-    font-size: 11px;
-  }
-  
-  form label {
-    font-size: 14px;
-  }
-  
-  form input, form select {
-    padding: 10px;
-    font-size: 14px;
-  }
-  
-  .device {
-    padding: 10px;
-  }
-  
-  .device img {
-    width: 36px;
-    height: 36px;
-  }
-  
-  .device span {
-    font-size: 12px;
-  }
+.device {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  background-color: #333;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.device:hover {
+  background-color: #444;
+  transform: scale(1.02);
+}
+
+.device.selected {
+  background-color: rgba(255, 0, 0, 0.2);
+  border: 1px solid rgba(255, 0, 0, 0.5);
+}
+
+.device.selected span {
+  color: #fff; /* Ensures text remains visible */
+}
+
+.device img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.device span {
+  color: white;
+  font-size: 16px;
+}
+.exercise {
+  background-color: #111; /* Dark background */
+  color: #00ffff; /* Cyan text */
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #00ffff; /* Cyan border */
+  margin-bottom: 15px;
+  transition: background-color 0.3s ease;
+}
+
+/* Hover effect for exercise class */
+.exercise:hover {
+  background-color: #222; /* Slightly lighter dark background */
 }
