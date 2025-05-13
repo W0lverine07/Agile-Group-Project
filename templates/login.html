@@ -9,20 +9,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <script id="flash-messages" type="application/json">
-        {{ get_flashed_messages(with_categories=true) | tojson }}
-    </script>
-
-<!-- Flash Messages -->
-    {% with messages = get_flashed_messages(with_categories=true) %}
-    {% if messages %}
-      <div class="flash-messages">
-        {% for category, message in messages %}
-          <div class="flash-message {{ category }}">{{ message }}</div>
-        {% endfor %}
-      </div>
-    {% endif %}
-    {% endwith %}
 
     
 <header>
@@ -41,6 +27,29 @@
         <a href="{{ url_for('main.history') }}"><button><i class="fas fa-history"></i> History</button></a>
     </div>
 </header>
+    <script id="flash-messages" type="application/json">
+        {{ get_flashed_messages(with_categories=true) | tojson }}
+    </script>
+<script>
+  setTimeout(() => {
+    document.querySelectorAll('.flash-message').forEach(el => {
+      el.style.transition = "opacity 0.5s ease-out";
+      el.style.opacity = 0;
+      setTimeout(() => el.remove(), 500); 
+    });
+  }, 1000); 
+</script>
+
+<!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <div class="flash-messages">
+        {% for category, message in messages %}
+          <div class="flash-message {{ category }}">{{ message }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+    {% endwith %}
 
 <!-- Main Content Area -->
 <div class="auth-container">
