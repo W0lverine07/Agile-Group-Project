@@ -465,6 +465,30 @@ def shared_with_me():
     
     return jsonify(formatted_shared)
 
+#start of the forgot password logic
+@main.route('/verify_forgot', methods=['POST'])
+def verify_forgot():
+    data = request.get_json()
+    username = data.get('username')
+    email = data.get('email')
+
+    match = UserDetails.query.filter_by(username=username, email=email).first()
+    return jsonify({'valid': match is not None})
+
+@main.route('/reset_password', methods=['POST'])
+def reset_password():
+    data = request.get_json()
+    username = data.get('username')
+    new_password = data.get('password')
+
+    user = User.query.filter_by(username=username).first()
+    if not user:
+        return jsonify({'success': False})
+
+    user.password_hash = generate_password_hash(new_password)
+    db.session.commit()
+    return jsonify({'success': True})
+
 @main.route('/faqs')
 def faqs():
     return render_template('faqs.html')

@@ -374,3 +374,73 @@ input[type="password"] {
 .hidden {
   display: none;
 }
+
+.input-field {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 6px;
+  color: white;
+}
+
+/* Forgot/Reset Password Modal Styling */
+.forgot-reset-modal {
+  background-color: rgba(20, 20, 20, 0.95);
+  padding: 25px;
+  border-radius: 15px;
+  width: 90%;
+  max-width: 450px;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+  text-align: center;
+}
+
+.modal-title {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.modal-subtitle {
+  font-size: 0.95rem;
+  margin-bottom: 20px;
+  color: #ccc;
+}
+
+.input-field {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  font-size: 1rem;
+  background-color: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: white;
+  outline: none;
+  transition: background 0.3s;
+}
+
+.input-field:focus {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: #16a085;
+}
+
+.modal-action-btn {
+  background-color: #ff0000;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  margin-top: 15px;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.modal-action-btn:hover {
+  background-color: #16a085;
+}
+
+
