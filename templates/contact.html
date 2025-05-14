@@ -8,6 +8,25 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+
+    <header>
+    <div class="left-header">
+    <a href="{{ url_for('main.home') }}" class="logo-link">
+        <img src="https://i.pinimg.com/originals/6d/e1/7f/6de17f9493638040838c12f4c947365b.gif"
+             alt="Wellness Tracker Logo" class="logo">
+    </a>
+    <h1>Wellness Tracker</h1>
+    </div>
+    <div class="nav-buttons">
+        <a href="{{ url_for('main.home') }}"><button><i class="fas fa-house"></i> Home Page</button></a>
+        <a href="{{ url_for('main.dashboard') }}"><button><i class="fas fa-chart-line"></i> Dashboard</button></a>
+        <a href="{{ url_for('main.login') }}"><button><i class="fas fa-circle-user"></i> Login</button></a>
+        <a href="{{ url_for('main.gallery') }}"><button><i class="fas fa-image"></i> Gallery</button></a>
+        <a href="{{ url_for('main.faqs') }}"><button><i class="fas fa-question-circle"></i> FAQ's</button></a>
+        <a href="{{ url_for('main.history') }}"><button><i class="fas fa-history"></i> History</button></a>
+    </div>
+  </header>
+
   <section class="contact-section">
     <div class="container">
       <div class="form-header">
