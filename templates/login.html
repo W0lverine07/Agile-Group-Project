@@ -81,7 +81,7 @@
                 </div>
 
                 <div class="form-footer">
-                    <a href="#" class="forgot-password">Forgot password?</a>
+                    <a href="#" class="forgot-password" onclick="showForgotPassword()">Forgot password?</a>
                 </div>
 
                 <button type="submit" class="submit-btn">
@@ -180,9 +180,28 @@
   <button onclick="closePopup()" class="modal-close-btn">Close</button>
 </div>
 
+<!-- Forgot Password Modal -->
+<div id="forgot-modal" class="modal hidden forgot-reset-modal">
+  <h3 class="modal-title">Forgot Password</h3>
+  <p class="modal-subtitle">Enter your username and registered email:</p>
+  <input type="text" id="forgot-username" placeholder="Username" class="input-field" />
+  <input type="email" id="forgot-email" placeholder="Email" class="input-field" />
+  <button onclick="verifyForgotDetails()" class="modal-action-btn">Verify</button>
+</div>
+
+<!-- Reset Password Modal -->
+<div id="reset-modal" class="modal hidden forgot-reset-modal">
+  <h3 class="modal-title">Reset Password</h3>
+  <input type="password" id="new-password" placeholder="New Password" class="input-field" />
+  <input type="password" id="confirm-password" placeholder="Confirm Password" class="input-field" />
+  <button onclick="resetPassword()" class="modal-action-btn">Update Password</button>
+</div>
+
+
 <div id="modal-overlay" class="modal-overlay hidden" onclick="closePopup()"></div>
 
 <script src="{{ url_for('static', filename='js/check_username.js') }}"></script>
+<script src="{{ url_for('static', filename='js/forgot_password.js') }}"></script>
 
 </body>
 </html>

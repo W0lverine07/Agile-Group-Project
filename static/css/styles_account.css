@@ -316,3 +316,31 @@ header h1 {
     font-size: 16px;
     margin-top: 5px;
 }
+
+.custom-input {
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-size: 16px;
+  width: 100%;
+  resize: vertical;
+}
+.custom-input:focus {
+  outline: none;
+  border-bottom: 1px solid #ff3e3e;
+}
+
+.custom-input.editable {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px dashed #68e5c8;
+  color: #ffffff;
+}
+
+.custom-input.editable:focus {
+  background-color: rgba(255, 255, 255, 0.15);
+  border: 1px solid #16a085;
+}
+
+.editable::placeholder {
+  color: #aaa;
+}

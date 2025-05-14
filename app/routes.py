@@ -214,6 +214,33 @@ def account():
         age=age
 )
 
+#FOR EDITING THE PROFILE PAGE
+@main.route('/update_profile', methods=['POST'])
+def update_profile():
+    if 'username' not in session:
+        return jsonify({'success': False, 'error': 'Not logged in'}), 403
+
+    data = request.get_json()
+    weight = data.get('weight')
+    height = data.get('height')
+    allergies = data.get('allergies')
+    medications = data.get('medications')
+
+    username = session['username']
+    user = UserDetails.query.filter_by(username=username).first()
+    if not user:
+        return jsonify({'success': False, 'error': 'User not found'}), 404
+
+    try:
+        user.weight = float(weight)
+        user.height = float(height)
+        user.allergies = allergies
+        user.medications = medications
+        db.session.commit()
+        return jsonify({'success': True})
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)})
+
 
 # Protecting routes that need authentication by adding @login_required
 @main.route('/upload')
@@ -403,6 +430,39 @@ def share_page():
 def health_data():
     return render_template('health_data.html')
 
+#TO FETCH THE AVAILABLE USERS FOR SHARING DATA
+@main.route('/api/users')
+@login_required
+def get_all_users():
+    current_user = session['username']
+    users = User.query.filter(User.username != current_user).all()
+    return jsonify([{'username': u.username} for u in users])
+
+#TO FETCH THE ACTIVITY DATA FOR THE LOGGED IN USER
+@main.route('/api/my_activities')
+@login_required
+def get_my_activities():
+    username = session['username']
+    activities = db.session.query(
+        ActivityData.id,
+        ActivityData.date,
+        ActivityData.duration_minutes,
+        ActivityData.calories_burnt,
+        ExerciseType.name.label('exercise_name')
+    ).join(ExerciseType).filter(
+        ActivityData.username == username
+    ).order_by(ActivityData.date.desc()).all()
+
+    return jsonify([
+        {
+            'id': a.id,
+            'date': a.date,
+            'duration': a.duration_minutes,
+            'calories': a.calories_burnt,
+            'exercise_name': a.exercise_name
+        } for a in activities
+    ])
+
 
 @main.route('/api/share_data', methods=['POST'])
 def share_data():
@@ -423,13 +483,14 @@ def share_data():
     
     # Store the share in the database
     new_share = SharedContent(
-        username = username,
-        shared_with_id=shared_with,
+        username=username,
+        shared_with_username=shared_with,
         content_type=content_type,
         content_id=content_id,
         message=message,
         share_date=datetime.now().strftime('%Y-%m-%d')
-    )
+)
+
     
     db.session.add(new_share)
     db.session.commit()
@@ -446,7 +507,7 @@ def shared_with_me():
     ).join(
         User, SharedContent.username == User.username
     ).filter(
-        SharedContent.shared_with_id == username
+        SharedContent.shared_with_username == username
     ).order_by(
         SharedContent.share_date.desc()
     ).all()
@@ -464,6 +525,30 @@ def shared_with_me():
         })
     
     return jsonify(formatted_shared)
+
+#start of the forgot password logic
+@main.route('/verify_forgot', methods=['POST'])
+def verify_forgot():
+    data = request.get_json()
+    username = data.get('username')
+    email = data.get('email')
+
+    match = UserDetails.query.filter_by(username=username, email=email).first()
+    return jsonify({'valid': match is not None})
+
+@main.route('/reset_password', methods=['POST'])
+def reset_password():
+    data = request.get_json()
+    username = data.get('username')
+    new_password = data.get('password')
+
+    user = User.query.filter_by(username=username).first()
+    if not user:
+        return jsonify({'success': False})
+
+    user.password_hash = generate_password_hash(new_password)
+    db.session.commit()
+    return jsonify({'success': True})
 
 @main.route('/faqs')
 def faqs():

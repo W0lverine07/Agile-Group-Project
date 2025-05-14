@@ -36,86 +36,11 @@
         
         <div class="content-tabs">
           <button class="tab-button active" onclick="switchTab('activities')">Activities</button>
-          <button class="tab-button" onclick="switchTab('achievements')">Achievements</button>
-          <button class="tab-button" onclick="switchTab('stats')">Statistics</button>
         </div>
         
         <div id="activities" class="tab-content active">
           <div class="scroll-container">
-            <!-- Activity items to share -->
-            <div class="share-item" onclick="selectItem('activity', 1)">
-              <div class="item-icon">
-                <img src="https://cdn-icons-png.flaticon.com/512/384/384276.png" alt="Running">
-              </div>
-              <div class="item-details">
-                <h4>Morning Run</h4>
-                <p>5.2 km • 45 min • 320 calories</p>
-                <p class="item-date">April 22, 2025</p>
-              </div>
-            </div>
-            
-            <div class="share-item" onclick="selectItem('activity', 2)">
-              <div class="item-icon">
-                <img src="https://cdn-icons-png.flaticon.com/512/2972/2972185.png" alt="Cycling">
-              </div>
-              <div class="item-details">
-                <h4>Evening Ride</h4>
-                <p>15 km • 60 min • 450 calories</p>
-                <p class="item-date">April 20, 2025</p>
-              </div>
-            </div>
-            
-            <div class="share-item" onclick="selectItem('activity', 3)">
-              <div class="item-icon">
-                <img src="https://cdn-icons-png.flaticon.com/512/2548/2548437.png" alt="Swimming">
-              </div>
-              <div class="item-details">
-                <h4>Swimming</h4>
-                <p>1.5 km • 30 min • 250 calories</p>
-                <p class="item-date">April 18, 2025</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <div id="achievements" class="tab-content">
-          <div class="scroll-container">
-            <!-- Achievement items to share -->
-            <div class="share-item" onclick="selectItem('achievement', 2)">
-              <div class="item-icon achievement">
-                <img src="https://cdn-icons-png.flaticon.com/512/6941/6941697.png" alt="Marathon Master">
-              </div>
-              <div class="item-details">
-                <h4>Marathon Master</h4>
-                <p>Ran over 42km in total</p>
-                <p class="item-date">April 16, 2025</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <div id="stats" class="tab-content">
-          <div class="scroll-container">
-            <!-- Stats to share -->
-            <div class="share-item" onclick="selectItem('stats', 'weekly')">
-              <div class="item-icon stats">
-                <img src="https://cdn-icons-png.flaticon.com/512/6295/6295417.png" alt="Weekly Stats">
-              </div>
-              <div class="item-details">
-                <h4>Weekly Activity Summary</h4>
-                <p>April 15 - April 22, 2025</p>
-              </div>
-            </div>
-            
-            <div class="share-item" onclick="selectItem('stats', 'monthly')">
-              <div class="item-icon stats">
-                <img src="https://cdn-icons-png.flaticon.com/512/1170/1170577.png" alt="Monthly Stats">
-              </div>
-              <div class="item-details">
-                <h4>Monthly Progress</h4>
-                <p>April 2025</p>
-              </div>
-            </div>
+            <!-- dynamically filled using js -->
           </div>
         </div>
       </div>
@@ -130,29 +55,7 @@
         </div>
         
         <div class="user-list scroll-container">
-          <div class="user-item" onclick="selectUser(1)">
-            <img src="https://i.pravatar.cc/50?img=1" alt="User" class="user-avatar">
-            <span class="user-name">user2</span>
-            <span class="user-selected"></span>
-          </div>
-          
-          <div class="user-item" onclick="selectUser(2)">
-            <img src="https://i.pravatar.cc/50?img=2" alt="User" class="user-avatar">
-            <span class="user-name">user3</span>
-            <span class="user-selected"></span>
-          </div>
-          
-          <div class="user-item" onclick="selectUser(3)">
-            <img src="https://i.pravatar.cc/50?img=3" alt="User" class="user-avatar">
-            <span class="user-name">user4</span>
-            <span class="user-selected"></span>
-          </div>
-          
-          <div class="user-item" onclick="selectUser(4)">
-            <img src="https://i.pravatar.cc/50?img=4" alt="User" class="user-avatar">
-            <span class="user-name">user5</span>
-            <span class="user-selected"></span>
-          </div>
+          <!-- dynamically filled using js -->
         </div>
         
         <div class="message-box">
@@ -170,7 +73,6 @@
       <div class="scroll-container shared-items">
         <div class="shared-item">
           <div class="shared-header">
-            <img src="https://i.pravatar.cc/50?img=2" alt="User" class="user-avatar">
             <div class="shared-info">
               <h4>user2 shared with you</h4>
               <p class="item-date">April 21, 2025</p>
@@ -178,7 +80,6 @@
           </div>
           <div class="shared-content">
             <div class="shared-item-icon">
-              <img src="https://cdn-icons-png.flaticon.com/512/3198/3198336.png" alt="Hiking">
             </div>
             <div class="shared-item-details">
               <h4>Weekend Hike</h4>
@@ -190,7 +91,6 @@
         
         <div class="shared-item">
           <div class="shared-header">
-            <img src="https://i.pravatar.cc/50?img=3" alt="User" class="user-avatar">
             <div class="shared-info">
               <h4>user3 shared with you</h4>
               <p class="item-date">April 19, 2025</p>
