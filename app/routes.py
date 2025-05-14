@@ -430,6 +430,39 @@ def share_page():
 def health_data():
     return render_template('health_data.html')
 
+#TO FETCH THE AVAILABLE USERS FOR SHARING DATA
+@main.route('/api/users')
+@login_required
+def get_all_users():
+    current_user = session['username']
+    users = User.query.filter(User.username != current_user).all()
+    return jsonify([{'username': u.username} for u in users])
+
+#TO FETCH THE ACTIVITY DATA FOR THE LOGGED IN USER
+@main.route('/api/my_activities')
+@login_required
+def get_my_activities():
+    username = session['username']
+    activities = db.session.query(
+        ActivityData.id,
+        ActivityData.date,
+        ActivityData.duration_minutes,
+        ActivityData.calories_burnt,
+        ExerciseType.name.label('exercise_name')
+    ).join(ExerciseType).filter(
+        ActivityData.username == username
+    ).order_by(ActivityData.date.desc()).all()
+
+    return jsonify([
+        {
+            'id': a.id,
+            'date': a.date,
+            'duration': a.duration_minutes,
+            'calories': a.calories_burnt,
+            'exercise_name': a.exercise_name
+        } for a in activities
+    ])
+
 
 @main.route('/api/share_data', methods=['POST'])
 def share_data():
@@ -450,13 +483,14 @@ def share_data():
     
     # Store the share in the database
     new_share = SharedContent(
-        username = username,
-        shared_with_id=shared_with,
+        username=username,
+        shared_with_username=shared_with,
         content_type=content_type,
         content_id=content_id,
         message=message,
         share_date=datetime.now().strftime('%Y-%m-%d')
-    )
+)
+
     
     db.session.add(new_share)
     db.session.commit()
@@ -473,7 +507,7 @@ def shared_with_me():
     ).join(
         User, SharedContent.username == User.username
     ).filter(
-        SharedContent.shared_with_id == username
+        SharedContent.shared_with_username == username
     ).order_by(
         SharedContent.share_date.desc()
     ).all()
