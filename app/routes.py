@@ -225,6 +225,8 @@ def update_profile():
     height = data.get('height')
     allergies = data.get('allergies')
     medications = data.get('medications')
+    avatar_url = data.get('avatar_url')
+
 
     username = session['username']
     user = UserDetails.query.filter_by(username=username).first()
@@ -236,6 +238,7 @@ def update_profile():
         user.height = float(height)
         user.allergies = allergies
         user.medications = medications
+        user.avatar_url = avatar_url
         db.session.commit()
         return jsonify({'success': True})
     except Exception as e:

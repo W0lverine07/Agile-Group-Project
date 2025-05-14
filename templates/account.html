@@ -34,9 +34,13 @@
         <!-- Profile view - card format (Glassmorphism) -->
         <div class="profile-card">
             <div class="profile-header">
-                <div class="avatar" style="background-color: rgba(255, 62, 62, 0.2);">
-                    <i class="fas fa-user" style="color: #FF3E3E;"></i>
+                <div class="avatar-container">
+                    <img id="avatarPreview" src="{{ user.avatar_url or 'https://api.dicebear.com/9.x/adventurer/svg?seed=Unknown' }}" class="avatar-img">
+                    <div id="editAvatarIcon" class="edit-avatar-icon" style="display: none;">
+                        <i class="fas fa-pen"></i>
+                    </div>
                 </div>
+
                 <h2>{{ user.first_name }} {{ user.last_name }}</h2>
                 <p class="email">{{ user.email }}</p>
             </div>
@@ -82,11 +86,38 @@
                     <textarea id="medicationsInput" class="detail-value custom-input multi-line" name="medications" rows="3" readonly>{{ user.medications }}</textarea>
                 </div>
 
+                <div class="detail-group full-width" id="avatarPicker" style="display: none;">
+                    <span class="detail-label"><i class="fas fa-image"></i> Select Avatar</span>
+                    <div class="avatar-options">
+                        {% for seed in ['Maria', 'Rex', 'Luna', 'Nova', 'Kai', 'Yuki', 'Juno'] %}
+                        <label class="avatar-label">
+                            <input type="radio" name="avatar_url" value="https://api.dicebear.com/9.x/adventurer/svg?seed={{ seed }}">
+                            <img src="https://api.dicebear.com/9.x/adventurer/svg?seed={{ seed }}" class="avatar-thumb">
+                        </label>
+                        {% endfor %}
+                    </div>
+                </div>
             </div>
 
             <button class="edit-btn" id="editBtn"><i class="fas fa-edit"></i> Edit Profile</button>
             <button class="edit-btn" id="saveBtn" style="display:none;"><i class="fas fa-save"></i> Save</button>
         </div>
+
+        <div id="avatarModal" class="avatar-modal">
+            <div class="avatar-modal-content">
+                <h3>Select an Avatar</h3>
+                <div class="avatar-options">
+                {% for seed in ['Maria', 'Rex', 'Luna', 'Nova', 'Kai', 'Yuki', 'Juno', 'Sawyer', 'Liliana', 'Leo', 'Chase'] %}
+                <label class="avatar-label">
+                    <input type="radio" name="avatar_url" value="https://api.dicebear.com/9.x/adventurer/svg?seed={{ seed }}">
+                    <img src="https://api.dicebear.com/9.x/adventurer/svg?seed={{ seed }}" class="avatar-thumb">
+                </label>
+                {% endfor %}
+                </div>
+                <button id="closeAvatarModal">Close</button>
+            </div>
+        </div>
+
 
         <!-- Stats Widgets -->
         <div class="stats-grid">
