@@ -10,7 +10,7 @@ from functools import wraps
 from sqlalchemy.sql import func
 import random # for generating random strings (Activity_id)
 import string # for generating random strings (Activity_id)
-import random, json
+import random, json, decimal
 
 main = Blueprint('main', __name__)
 
@@ -266,7 +266,7 @@ def generate_activity_id(username):
 def upload_data():
     username = session['username']  # Get username from session
     exercise_type_id = request.form.get('exercise_type', type=int)
-    duration = request.form.get('duration', type=int)
+    duration = int(float(request.form['duration']) + 1)
     date = request.form.get('date', datetime.now().strftime('%Y-%m-%d'))
     
     if not exercise_type_id or not duration:
