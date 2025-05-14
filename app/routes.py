@@ -515,17 +515,35 @@ def shared_with_me():
         SharedContent.share_date.desc()
     ).all()
     
-    # Format data for JSON response
     formatted_shared = []
     for shared, username in shared_items:
-        formatted_shared.append({
+        item_data = {
             'id': shared.id,
             'shared_by': username,
             'content_type': shared.content_type,
-            'content_id': shared.content_id,
             'message': shared.message,
             'share_date': shared.share_date
-        })
+        }
+
+        # Enrich with activity details
+        if shared.content_type == 'activity':
+            activity = db.session.query(ActivityData, ExerciseType.name).join(
+                ExerciseType, ActivityData.exercise_type_id == ExerciseType.id
+            ).filter(ActivityData.id == shared.content_id).first()
+
+            if activity:
+                activity_data, exercise_name = activity
+                item_data.update({
+                    'exercise_name': exercise_name,
+                    'duration': activity_data.duration_minutes,
+                    'calories': activity_data.calories_burnt,
+                    'date': activity_data.date
+                })
+            else:
+                item_data.update({'exercise_name': 'Unknown'})
+
+        formatted_shared.append(item_data)
+
     
     return jsonify(formatted_shared)
 
