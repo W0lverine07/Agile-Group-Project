@@ -1,10 +1,13 @@
 // Global variables
 let activityChart = null;
 let distributionChart = null;
+let intensityChart = null;
+let consistencyChart = null;
+let comparisonChart = null;
 let tableData = [];
 let filteredData = [];
 let currentPage = 1;
-const rowsPerPage = 10;
+const rowsPerPage = 6;
 let sortColumn = 0;
 let sortDirection = 'desc';
 
@@ -16,6 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Create the initial charts
     createActivityChart();
     createDistributionChart();
+    createExtraCharts();
     
     // Populate the table
     populateTable();
@@ -23,17 +27,43 @@ document.addEventListener('DOMContentLoaded', function() {
     // Update progress bars
     updateProgressBars();
     
-    // Show share prompt with 30% chance after 5 seconds
-    setTimeout(function() {
-        if (Math.random() < 0.3) {
-            document.getElementById('share-prompt').style.display = 'flex';
-        }
-    }, 5000);
-    
-    // Add event listeners for pagination buttons
+    // Add event listeners
+    setupEventListeners();
+});
+
+function setupEventListeners() {
+    // Pagination buttons
     document.getElementById('prev-page').addEventListener('click', prevPage);
     document.getElementById('next-page').addEventListener('click', nextPage);
-});
+    
+    // Time period filter
+    document.getElementById('time-period').addEventListener('change', updateCharts);
+    
+    // Data toggles
+    document.getElementById('show-duration').addEventListener('change', function() {
+        toggleDataset('duration');
+    });
+    document.getElementById('show-calories').addEventListener('change', function() {
+        toggleDataset('calories');
+    });
+    
+    // Table search
+    document.getElementById('table-search').addEventListener('input', filterTable);
+    
+    // Export button
+    document.getElementById('export-csv').addEventListener('click', exportCSV);
+    
+    // Share prompt
+    document.getElementById('close-share-prompt').addEventListener('click', closeSharePrompt);
+    
+    // Table headers for sorting
+    const headers = document.querySelectorAll('#activityDataTable th');
+    headers.forEach((header, index) => {
+        if (index < 4) { // Only first 4 columns are sortable
+            header.addEventListener('click', () => sortTable(index));
+        }
+    });
+}
 
 function parseServerData() {
     if (serverData && serverData.length > 0) {
@@ -68,14 +98,15 @@ function createActivityChart() {
                 calories: 0
             };
         }
-        groupedData[item.date].duration += parseInt(item.duration);
+        let duration = Math.round(Number(item.duration));
+        groupedData[item.date].duration += duration;
         groupedData[item.date].calories += parseInt(item.calories);
     });
     
     // Prepare data for chart
     const labels = Object.keys(groupedData);
-    const durationData = labels.map(date => groupedData[date].duration);
-    const caloriesData = labels.map(date => groupedData[date].calories);
+    const durationData = Object.values(groupedData).map(item => item.duration);
+    const caloriesData = Object.values(groupedData).map(item => item.calories);
     
     // Create chart
     activityChart = new Chart(ctx, {
@@ -218,6 +249,167 @@ function createDistributionChart() {
     });
 }
 
+function createExtraCharts() {
+    // Create intensity chart
+    const intensityCtx = document.getElementById('intensityChart').getContext('2d');
+    
+    if (intensityChart) {
+        intensityChart.destroy();
+    }
+    
+    // Calculate intensity levels
+    const intensityLevels = {
+        'Low': 0,
+        'Moderate': 0,
+        'High': 0,
+        'Very High': 0
+    };
+    
+    filteredData.forEach(item => {
+        const duration = parseInt(item.duration);
+        const calories = parseInt(item.calories);
+        const calsPerMinute = calories / duration;
+        
+        if (calsPerMinute < 5) {
+            intensityLevels['Low'] += duration;
+        } else if (calsPerMinute < 8) {
+            intensityLevels['Moderate'] += duration;
+        } else if (calsPerMinute < 12) {
+            intensityLevels['High'] += duration;
+        } else {
+            intensityLevels['Very High'] += duration;
+        }
+    });
+    
+    intensityChart = new Chart(intensityCtx, {
+        type: 'doughnut',
+        data: {
+            labels: Object.keys(intensityLevels),
+            datasets: [{
+                data: Object.values(intensityLevels),
+                backgroundColor: [
+                    'rgba(75, 192, 192, 0.8)',
+                    'rgba(54, 162, 235, 0.8)',
+                    'rgba(255, 159, 64, 0.8)',
+                    'rgba(255, 99, 132, 0.8)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false
+        }
+    });
+    
+    // Create consistency chart (simplified heatmap)
+    const consistencyCtx = document.getElementById('consistencyChart').getContext('2d');
+    
+    if (consistencyChart) {
+        consistencyChart.destroy();
+    }
+    
+    // Group by weekday
+    const weekdayData = {
+        'Mon': 0,
+        'Tue': 0,
+        'Wed': 0,
+        'Thu': 0,
+        'Fri': 0,
+        'Sat': 0,
+        'Sun': 0
+    };
+    
+    filteredData.forEach(item => {
+        const date = new Date(item.full_date);
+        const weekday = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][date.getDay()];
+        weekdayData[weekday] += 1;
+    });
+    
+    consistencyChart = new Chart(consistencyCtx, {
+        type: 'bar',
+        data: {
+            labels: Object.keys(weekdayData),
+            datasets: [{
+                label: 'Workout Frequency',
+                data: Object.values(weekdayData),
+                backgroundColor: 'rgba(54, 162, 235, 0.8)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Number of Workouts'
+                    }
+                }
+            }
+        }
+    });
+    
+    // Create comparison chart
+    const comparisonCtx = document.getElementById('comparisonChart').getContext('2d');
+    
+    if (comparisonChart) {
+        comparisonChart.destroy();
+    }
+    
+    // Calculate calories per minute by exercise type
+    const efficiencyData = {};
+    
+    filteredData.forEach(item => {
+        const type = item.exercise_type;
+        if (!efficiencyData[type]) {
+            efficiencyData[type] = {
+                totalCalories: 0,
+                totalDuration: 0
+            };
+        }
+        
+        efficiencyData[type].totalCalories += parseInt(item.calories);
+        efficiencyData[type].totalDuration += parseInt(item.duration);
+    });
+    
+    const efficiencyLabels = Object.keys(efficiencyData);
+    const efficiencyValues = efficiencyLabels.map(type => {
+        const data = efficiencyData[type];
+        return data.totalCalories / data.totalDuration;
+    });
+    
+    comparisonChart = new Chart(comparisonCtx, {
+        type: 'bar',
+        data: {
+            labels: efficiencyLabels,
+            datasets: [{
+                label: 'Calories per Minute',
+                data: efficiencyValues,
+                backgroundColor: 'rgba(153, 102, 255, 0.8)',
+                borderColor: 'rgba(153, 102, 255, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Calories per Minute'
+                    }
+                }
+            }
+        }
+    });
+}
+
 function populateTable() {
     const tableBody = document.getElementById('activityDataBody');
     tableBody.innerHTML = '';
@@ -263,7 +455,7 @@ function populateTable() {
         const shareButton = document.createElement('button');
         shareButton.className = 'action-btn share-btn';
         shareButton.textContent = 'Share';
-        shareButton.onclick = function() { shareActivity(item); };
+        shareButton.addEventListener('click', function() { shareActivity(item); });
         actionsCell.appendChild(shareButton);
         
         row.appendChild(actionsCell);
@@ -306,6 +498,17 @@ function updateProgressBars() {
     const workoutPercent = Math.min(Math.round((workoutCount / workoutGoal) * 100), 100);
     document.getElementById('weekly-progress').textContent = `${workoutCount}/${workoutGoal} workouts`;
     document.getElementById('weekly-fill').style.width = `${workoutPercent}%`;
+    
+    // Update goal cards if they exist
+    if (document.getElementById('weekly-goal-fill')) {
+        document.getElementById('weekly-goal-fill').style.width = `${workoutPercent}%`;
+        document.querySelector('.goal-value').textContent = `${workoutCount}/${workoutGoal} workouts`;
+    }
+    
+    if (document.getElementById('calorie-goal-fill')) {
+        document.getElementById('calorie-goal-fill').style.width = `${caloriesPercent}%`;
+        document.querySelectorAll('.goal-value')[1].textContent = `${totalCalories}/${caloriesGoal} kcal`;
+    }
 }
 
 function updateCharts() {
@@ -326,6 +529,7 @@ function updateCharts() {
                 filteredData = [...tableData];
                 createActivityChart();
                 createDistributionChart();
+                createExtraCharts();
                 populateTable();
                 updateProgressBars();
                 
@@ -349,6 +553,7 @@ function updateCharts() {
         // No user ID available, just use demo data
         createActivityChart();
         createDistributionChart();
+        createExtraCharts();
     }
 }
 
@@ -445,6 +650,7 @@ function filterTable() {
     populateTable();
     createActivityChart();
     createDistributionChart();
+    createExtraCharts();
     updateProgressBars();
 }
 
@@ -491,31 +697,4 @@ function shareActivity(activity) {
 
 function closeSharePrompt() {
     document.getElementById('share-prompt').style.display = 'none';
-}
-
-function generateDemoData() {
-    // Demo data for development/testing
-    const demoData = [];
-    const exercises = ['Running', 'Walking', 'Cycling', 'Swimming', 'Hiking', 'Weight Training'];
-    const today = new Date();
-    
-    for (let i = 0; i < 14; i++) {
-        const date = new Date(today);
-        date.setDate(date.getDate() - i);
-        const dateStr = date.toISOString().split('T')[0];
-        
-        const exerciseType = exercises[Math.floor(Math.random() * exercises.length)];
-        const duration = Math.floor(Math.random() * 60) + 15; // 15-75 minutes
-        const calories = Math.floor(duration * (Math.random() * 5 + 5)); // 5-10 calories per minute
-        
-        demoData.push({
-            date: date.toLocaleDateString('en-US', { weekday: 'short' }),
-            full_date: dateStr,
-            exercise_type: exerciseType,
-            duration: duration,
-            calories: calories
-        });
-    }
-    
-    return demoData;
 }
