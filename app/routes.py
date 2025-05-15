@@ -301,6 +301,7 @@ def upload_data():
     return redirect(url_for('main.visualize'))
 
 @main.route('/visualize')
+@login_required
 def visualize():
     username = session['username']
     time_period = request.args.get('period', 'week')
@@ -425,6 +426,7 @@ def api_calculate_calories():
     return jsonify({'calories': calories})
 
 @main.route('/share_page')
+@login_required
 def share_page():
     return render_template('share_page.html')
 
