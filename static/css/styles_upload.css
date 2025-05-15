@@ -204,7 +204,7 @@ form {
 .form-group {
   margin-bottom: 20px;
 }
-
+ 
 form label {
   display: block;
   margin-bottom: 8px;
@@ -242,16 +242,12 @@ form select {
   border-radius: 6px;
   border: 1px solid rgba(255, 255, 255, 0.2);
   background-color: #1e1e1e; /* Dark grey background */
-  color: #ff4d4d; /* Light red text */
+  color: #fcfafa; /* Light red text */
   font-size: 16px;
   transition: all 0.3s ease;
-
-  /* Add this for consistent appearance across browsers */
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-
-  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
   background-repeat: no-repeat;
   background-position: right 15px center;
   background-size: 15px;
@@ -522,6 +518,7 @@ form input[readonly] {
   color: white;
   font-size: 16px;
 }
+
 .exercise {
   background-color: #111; /* Dark background */
   color: #00ffff; /* Cyan text */

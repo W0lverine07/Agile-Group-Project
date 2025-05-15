@@ -100,6 +100,43 @@ header h1 {
     text-decoration: none;
 }
 
+form {
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 10px;
+  padding: 25px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+/* Style the select dropdown */
+#time-period {
+  background-color: #2c3e50; /* dark blue background */
+  color: #ecf0f1;            /* light font color */
+  font-family: Arial, sans-serif;
+  padding: 5px 10px;
+  border: 1px solid #34495e;
+  border-radius: 4px;
+  appearance: none;          /* remove default arrow on some browsers */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+}
+
+/* Optional: style the dropdown arrow (only on some browsers) */
+#time-period::-ms-expand {
+  display: none; /* hide default arrow in IE/Edge */
+}
+
+/* You can also style options, but it’s limited by browsers */
+#time-period option {
+  background-color: #34495e;
+  color: #ecf0f1;
+  font-family: Arial, sans-serif;
+}
+
 .dropdown-content a:hover {
     background-color: #666;
 }
