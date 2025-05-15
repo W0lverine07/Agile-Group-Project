@@ -17,3 +17,5 @@ ENV/
 
 # Migrations (optional, depending on your workflow)
 # migrations/
+
+.db
