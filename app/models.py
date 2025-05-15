@@ -28,6 +28,7 @@ class UserDetails(db.Model):
     # New fields  for profile
     allergies = db.Column(db.Text, nullable=True)
     medications = db.Column(db.Text, nullable=True)
+    avatar_url = db.Column(db.String(255), nullable=True)
 
 class ExerciseType(db.Model):
     __tablename__ = 'exercise_types'

@@ -10,7 +10,7 @@ from functools import wraps
 from sqlalchemy.sql import func
 import random # for generating random strings (Activity_id)
 import string # for generating random strings (Activity_id)
-import random, json
+import random, json, decimal
 
 main = Blueprint('main', __name__)
 
@@ -225,6 +225,8 @@ def update_profile():
     height = data.get('height')
     allergies = data.get('allergies')
     medications = data.get('medications')
+    avatar_url = data.get('avatar_url')
+
 
     username = session['username']
     user = UserDetails.query.filter_by(username=username).first()
@@ -236,6 +238,7 @@ def update_profile():
         user.height = float(height)
         user.allergies = allergies
         user.medications = medications
+        user.avatar_url = avatar_url
         db.session.commit()
         return jsonify({'success': True})
     except Exception as e:
@@ -263,7 +266,7 @@ def generate_activity_id(username):
 def upload_data():
     username = session['username']  # Get username from session
     exercise_type_id = request.form.get('exercise_type', type=int)
-    duration = request.form.get('duration', type=int)
+    duration = int(float(request.form['duration']) + 1)
     date = request.form.get('date', datetime.now().strftime('%Y-%m-%d'))
     
     if not exercise_type_id or not duration:
@@ -298,6 +301,7 @@ def upload_data():
     return redirect(url_for('main.visualize'))
 
 @main.route('/visualize')
+@login_required
 def visualize():
     username = session['username']
     time_period = request.args.get('period', 'week')
@@ -422,6 +426,7 @@ def api_calculate_calories():
     return jsonify({'calories': calories})
 
 @main.route('/share_page')
+@login_required
 def share_page():
     return render_template('share_page.html')
 
@@ -512,17 +517,35 @@ def shared_with_me():
         SharedContent.share_date.desc()
     ).all()
     
-    # Format data for JSON response
     formatted_shared = []
     for shared, username in shared_items:
-        formatted_shared.append({
+        item_data = {
             'id': shared.id,
             'shared_by': username,
             'content_type': shared.content_type,
-            'content_id': shared.content_id,
             'message': shared.message,
             'share_date': shared.share_date
-        })
+        }
+
+        # Enrich with activity details
+        if shared.content_type == 'activity':
+            activity = db.session.query(ActivityData, ExerciseType.name).join(
+                ExerciseType, ActivityData.exercise_type_id == ExerciseType.id
+            ).filter(ActivityData.id == shared.content_id).first()
+
+            if activity:
+                activity_data, exercise_name = activity
+                item_data.update({
+                    'exercise_name': exercise_name,
+                    'duration': activity_data.duration_minutes,
+                    'calories': activity_data.calories_burnt,
+                    'date': activity_data.date
+                })
+            else:
+                item_data.update({'exercise_name': 'Unknown'})
+
+        formatted_shared.append(item_data)
+
     
     return jsonify(formatted_shared)
 

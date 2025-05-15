@@ -2,6 +2,20 @@
 let selectedItem = null;
 let selectedUsers = [];
 
+ const localActivityIcons = {
+  'running': '/static/image/running.png',
+  'cycling': '/static/image/cycling.png',
+  'yoga': '/static/image/yoga.png',
+  'walking': '/static/image/walking.png',
+  'dancing': '/static/image/dancing.png',
+  'soccer': '/static/image/soccer.png',
+  'hiking': '/static/image/hiking.png',
+  'weight training': '/static/image/gym.png',
+  'swimming': '/static/image/swimming1.png',
+  'basketball': '/static/image/basketball.png',
+  'default': '/static/image/gym.png'
+};
+
 // === Load Data ===
 document.addEventListener('DOMContentLoaded', () => {
   updateShareButton();
@@ -47,19 +61,22 @@ function loadActivities() {
       const container = document.getElementById('activities').querySelector('.scroll-container');
       container.innerHTML = '';
       activities.forEach(activity => {
-        const div = document.createElement('div');
-        div.className = 'share-item';
-        div.onclick = () => selectItem('activity', activity.id, div);
-        div.innerHTML = `
-          <div class="item-icon"><img src="https://cdn-icons-png.flaticon.com/512/384/384276.png" /></div>
-          <div class="item-details">
-            <h4>${activity.exercise_name}</h4>
-            <p>${activity.duration} min • ${activity.calories} cal</p>
-            <p class="item-date">${activity.date}</p>
-          </div>
-        `;
-        container.appendChild(div);
-      });
+      const iconPath = localActivityIcons[activity.exercise_name?.toLowerCase()] || localActivityIcons['default'];
+
+      const div = document.createElement('div');
+      div.className = 'share-item';
+      div.onclick = () => selectItem('activity', activity.id, div);
+      div.innerHTML = `
+        <div class="item-icon"><img src="${iconPath}" alt="${activity.exercise_name} icon" /></div>
+        <div class="item-details">
+          <h4>${activity.exercise_name}</h4>
+          <p>${activity.duration} min • ${activity.calories} cal</p>
+          <p class="item-date">${activity.date}</p>
+        </div>
+      `;
+      container.appendChild(div);
+    });
+
     });
 }
 
@@ -73,6 +90,8 @@ function loadSharedWithMe() {
       data.forEach((item, index) => {
         const div = document.createElement('div');
         div.className = 'shared-item';
+       const iconPath = localActivityIcons[item.exercise_name?.toLowerCase()] || localActivityIcons['default'];
+
         div.innerHTML = `
           <div class="shared-header">
             <div class="shared-info">
@@ -82,15 +101,17 @@ function loadSharedWithMe() {
           </div>
           <div class="shared-content">
             <div class="shared-item-icon">
-              <img src="https://cdn-icons-png.flaticon.com/512/3198/3198336.png">
+              <img src="${iconPath}" alt="${item.exercise_name}">
             </div>
             <div class="shared-item-details">
-              <h4>${item.content_type.toUpperCase()}</h4>
-              <p>ID: ${item.content_id}</p>
+              <h4>${item.exercise_name}</h4>
+              <p>${item.duration} min • ${item.calories} cal</p>
+              <p class="item-date">${item.date}</p>
               <p class="shared-message">${item.message || ''}</p>
             </div>
           </div>
         `;
+
         container.appendChild(div);
       });
     });

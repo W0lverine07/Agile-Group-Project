@@ -8,6 +8,44 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+
+<header>
+    <div class="left-header">
+    <a href="{{ url_for('main.home') }}" class="logo-link">
+        <img src="https://i.pinimg.com/originals/6d/e1/7f/6de17f9493638040838c12f4c947365b.gif"
+             alt="Wellness Tracker Logo" class="logo">
+    </a>
+    <h1>Wellness Tracker</h1>
+    </div>
+    <div class="nav-buttons">
+      <a href="{{ url_for('main.home') }}"><button><i class="fas fa-house"></i> Home Page</button></a>
+        <div class="dropdown">
+            <button class="dropbtn"><i class="fas fa-chart-line"></i> Dashboard</button>
+            <div class="dropdown-content">
+                <a href="{{ url_for('main.dashboard') }}"><button><i class="fas fa-chart-line"></i> Dashboard</button></a>
+                <a href="{{ url_for('main.upload') }}"><i class="fas fa-upload"></i> Record Activity</a>
+                <a href="{{ url_for('main.visualize') }}"><i class="fas fa-chart-pie"></i> View Analytics</a>
+                <a href="{{ url_for('main.share_page') }}"><i class="fas fa-share"></i> Share Activity</a>
+            </div>
+        </div>
+
+  {% if 'username' in session %}
+        <a href="{{ url_for('main.logout') }}"><button class="logout-btn"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</button></a>
+  {% else %}
+        <a href="{{ url_for('main.login') }}"><button><i class="fas fa-circle-user"></i> Login</button></a>
+  {% endif %}
+
+  <div class="dropdown">
+            <button class="dropbtn"><i class="fas fa-bars"></i> More</button>
+            <div class="dropdown-content">
+                <a href="{{ url_for('main.gallery') }}"><i class="fas fa-image"></i> Gallery</a>
+                <a href="{{ url_for('main.faqs') }}"><i class="fas fa-question-circle"></i> FAQ's</a>
+                <a href="{{ url_for('main.history') }}"><i class="fas fa-history"></i> History</a>
+            </div>
+        </div>
+    </div>
+</header>
+
   <section class="contact-section">
     <div class="container">
       <div class="form-header">
