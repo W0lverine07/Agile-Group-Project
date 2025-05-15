@@ -80,7 +80,7 @@ header {
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #444;
+    background-color: transparent;
     min-width: 160px;
     box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
     z-index: 1;
@@ -93,10 +93,11 @@ header {
     padding: 12px 16px;
     display: block;
     text-decoration: none;
+    background-color: rgba(255, 0, 0, 0.3); /* transparent red background */
 }
 
 .dropdown-content a:hover {
-    background-color: #666;
+    background-color: #16a085;
 }
 
 .dropdown:hover .dropdown-content {
@@ -104,7 +105,7 @@ header {
 }
 
 .dropdown:hover .dropbtn {
-    background-color: #555;
+    background-color: #16a085;
 }
 
 .logo {
@@ -211,6 +212,8 @@ form label {
   font-size: 16px;
   font-weight: 500;
   color: #fff;
+    background-color: transparent;
+
 }
 
 .input-helper {
@@ -224,7 +227,7 @@ form input, form select {
   padding: 12px 15px;
   border-radius: 6px;
   border: 1px solid rgba(255, 255, 255, 0.2);
-  background-color: rgba(255, 255, 255, 0.05);
+  background-color: transparent;
   color: #fff;
   font-size: 16px;
   transition: all 0.3s ease;
@@ -234,6 +237,7 @@ form input:focus, form select:focus {
   outline: none;
   border-color: #ff0000;
   box-shadow: 0 0 0 2px rgba(255, 0, 0, 0.2);
+  background-color: #1e1e1e;
 }
 
 form select {
@@ -241,18 +245,22 @@ form select {
   padding: 12px 15px;
   border-radius: 6px;
   border: 1px solid rgba(255, 255, 255, 0.2);
-  background-color: #1e1e1e; /* Dark grey background */
-  color: #fcfafa; /* Light red text */
+  background-color: transparent;
+  color: #fcfafa; 
   font-size: 16px;
   transition: all 0.3s ease;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
   background-repeat: no-repeat;
   background-position: right 15px center;
   background-size: 15px;
 }
 
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
 
 form input[readonly] {
   background-color: rgba(255, 255, 255, 0.03);
