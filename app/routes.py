@@ -1,3 +1,4 @@
+from app.forms import LoginForm, RegisterForm #for CSRF protection
 from flask import Blueprint, request, redirect, url_for, render_template, flash
 from app.db_helper import get_db_connection
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -23,7 +24,34 @@ def home():
 @main.route('/gallery')
 def gallery():
     return render_template('gallery.html')
-        
+
+#Included CSRF protection
+#Start of Register logic
+@main.route('/register', methods=['POST'])
+def register():
+    form = RegisterForm()
+    if form.validate_on_submit():
+        username = form.username.data
+        password = form.password.data
+        confirm_password = form.confirm_password.data
+
+        existing_user = User.query.filter_by(username=username).first()
+        if existing_user:
+            flash("Username already exists", "error")
+            return redirect(url_for('main.login'))
+
+        hashed_pw = generate_password_hash(password)
+        new_user = User(username=username, password_hash=hashed_pw)
+        db.session.add(new_user)
+        db.session.commit()
+        session['registered_username'] = username
+        return redirect(url_for('main.edit_profile'))
+
+    flash("Invalid input. Please try again.", "error")
+    return redirect(url_for('main.login'))
+#End of Register logic
+
+'''        
 @main.route('/register', methods=['POST'])
 def register():
     username = request.form.get('username')
@@ -50,6 +78,7 @@ def register():
 
     session['registered_username'] = username  #Storing the username in session for later use
     return redirect(url_for('main.edit_profile'))
+'''
 
 #start of the check username in database
 @main.route('/check_username', methods=['POST'])
@@ -59,6 +88,27 @@ def check_username():
     return jsonify({'available': not exists})
 #end of the check username in database
 
+#Included CSRF protection
+#start of check username in database
+@main.route('/login', methods=['GET', 'POST'])
+def login():
+    form = LoginForm()
+    if form.validate_on_submit():
+        username = form.username.data
+        password = form.password.data
+        user = User.query.filter_by(username=username).first()
+        if user and check_password_hash(user.password_hash, password):
+            session['username'] = username
+            session['logged_in'] = True
+            flash("Login successful!", "success")
+            return redirect(url_for('main.health_data'))
+        else:
+            flash("Invalid username or password", "error")
+            return redirect(url_for('main.login'))
+    return render_template('login.html', form=form)
+#end of change
+
+'''
 @main.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -76,7 +126,7 @@ def login():
             return redirect(url_for('main.login'))
 
     return render_template('login.html')
-
+'''
 @main.route('/logout')
 def logout():
     session.clear()  # Clears all session data
@@ -266,7 +316,7 @@ def generate_activity_id(username):
 def upload_data():
     username = session['username']  # Get username from session
     exercise_type_id = request.form.get('exercise_type', type=int)
-    duration = int(float(request.form['duration']) + 1)
+    duration = int(float(request.form['duration']))
     date = request.form.get('date', datetime.now().strftime('%Y-%m-%d'))
     
     if not exercise_type_id or not duration:

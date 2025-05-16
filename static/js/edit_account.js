@@ -53,11 +53,25 @@ document.addEventListener("DOMContentLoaded", function () {
       avatar_url: selectedAvatar,
     };
 
+// Inclusion of CSRF token for security
+
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
     fetch("/update_profile", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRFToken": csrfToken
+      },
       body: JSON.stringify(payload),
     })
+
+//    fetch("/update_profile", {
+//      method: "POST",
+//      headers: { "Content-Type": "application/json" },
+//      body: JSON.stringify(payload),
+//    })
+
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {

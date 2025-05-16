@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="csrf-token" content="{{ csrf_token() }}"> <!-- CSRF Token inclusion -->
+
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Edit Profile</title>
@@ -28,6 +30,7 @@
         <div class="form-container">
             <h2>Update Your Profile</h2>
             <form action="{{ url_for('main.save_profile') }}" method="POST">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"> <!-- CSRF Token inclusion -->
                 <div class="form-group">
                     <label for="fname">First Name</label>
                     <input type="text" id="fname" name="first_name" class="custom-input" placeholder="Enter your first name" required>
