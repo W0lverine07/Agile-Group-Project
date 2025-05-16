@@ -1,26 +1,3 @@
-<a id="readme-top"></a>
-
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Commits][commits-shield]][commits-url]
-[![Issues][issues-shield]][issues-url]
-[![License][license-shield]][license-url]
-
-[contributors-shield]: https://img.shields.io/github/contributors/W0lverine07/Agile-Group-Project.svg?style=for-the-badge
-[contributors-url]: https://github.com/W0lverine07/Agile-Group-Project/graphs/contributors
-
-[forks-shield]: https://img.shields.io/github/forks/W0lverine07/Agile-Group-Project.svg?style=for-the-badge
-[forks-url]: https://github.com/W0lverine07/Agile-Group-Project/network/members
-
-[commits-shield]: https://img.shields.io/github/commit-activity/m/W0lverine07/Agile-Group-Project?style=for-the-badge
-[commits-url]: https://github.com/W0lverine07/Agile-Group-Project/commits/main
-
-[issues-shield]: https://img.shields.io/github/issues/W0lverine07/Agile-Group-Project.svg?style=for-the-badge
-[issues-url]: https://github.com/W0lverine07/Agile-Group-Project/issues
-
-[license-shield]: https://img.shields.io/github/license/W0lverine07/Agile-Group-Project.svg?style=for-the-badge
-[license-url]: https://github.com/W0lverine07/Agile-Group-Project/blob/main/LICENSE
-
 
 <!-- PROJECT LOGO -->
 <br />
