@@ -154,7 +154,6 @@ header .logo-link span {
   line-height: 1.6;
 }
 
-/* Dashboard summary */
 .dashboard-summary {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -206,7 +205,6 @@ header .logo-link span {
   letter-spacing: 0.8px;
 }
 
-/* Options row */
 .options-row {
   display: flex;
   justify-content: center;
@@ -246,7 +244,6 @@ header .logo-link span {
   font-weight: 600;
 }
 
-/* Dashboard charts */
 .dashboard-charts {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(460px, 1fr));
@@ -272,7 +269,6 @@ header .logo-link span {
   text-align: center;
 }
 
-/* Dropdown */
 .dropdown {
   position: relative;
   display: inline-block;
@@ -324,7 +320,6 @@ header .logo-link span {
   background-color: #16a085;
 }
 
-/* Quick actions */
 .quick-actions {
   background-color: rgba(0, 0, 0, 0.75);
   border-radius: 20px;
@@ -373,10 +368,11 @@ header .logo-link span {
   height: 52px;
   margin-bottom: 10px;
 }
+
 /* Extra small devices (phones, less than 576px) */
 @media (max-width: 575.98px) {
   body {
-    font-size: 14px; /* slightly smaller font */
+    font-size: 14px;
     line-height: 1.4;
   }
 
@@ -393,11 +389,13 @@ header .logo-link span {
 
   .nav-buttons {
     gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
   }
 
   .nav-buttons button {
-    padding: 10px 18px;
-    font-size: 14px;
+    padding: 10px 16px;
+    font-size: 13.5px;
   }
 
   .content {
@@ -407,62 +405,29 @@ header .logo-link span {
 
   .content h2 {
     font-size: 1.75rem;
-    margin-bottom: 20px;
   }
 
   .welcome-message {
     font-size: 1rem;
-    max-width: 90%;
-  }
-
-  /* Dashboard summary grid becomes one column */
-  .dashboard-summary {
-    grid-template-columns: 1fr;
-    gap: 16px;
   }
 
   .summary-card {
-    padding: 18px;
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .summary-icon {
-    width: 50px;
-    height: 50px;
-    margin-right: 18px;
-  }
-
-  .summary-data h3 {
-    font-size: 1rem;
-  }
-
-  .summary-value {
-    font-size: 1.25rem;
-  }
-
-  /* Options row stacks vertically */
-  .options-row {
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  .option {
-    max-width: 100%;
+    margin-bottom: 12px;
+    margin-right: 0;
   }
 
   .option img {
-    width: 100%;
-    height: auto;
-    max-height: 160px;
+    width: 120px;
+    height: 120px;
   }
 
   .option p {
     font-size: 1rem;
-  }
-
-  /* Dashboard charts stack vertically */
-  .dashboard-charts {
-    grid-template-columns: 1fr;
-    gap: 24px;
   }
 
   .chart-container {
@@ -470,63 +435,109 @@ header .logo-link span {
     height: auto;
   }
 
-  /* Quick actions - buttons full width */
-  .action-buttons {
-    flex-direction: column;
-    gap: 20px;
+  .dashboard-charts {
+    grid-template-columns: 1fr;
   }
 
   .action-button {
-    width: 100%;
-    padding: 14px;
+    width: 120px;
   }
 
   .action-button img {
-    width: 42px;
-    height: 42px;
+    width: 44px;
+    height: 44px;
   }
 }
-
-/* Small devices (tablets, 576px and up) */
-@media (min-width: 576px) and (max-width: 767.98px) {
+@media (max-width: 575.98px) {
   body {
-    font-size: 15px;
+    font-size: 14px;
+    line-height: 1.4;
   }
 
   header {
-    padding: 1.25rem 2rem;
+    padding: 1rem 1.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
   }
 
-  .content {
-    padding: 0 20px;
+  .left-header h1 {
+    font-size: 1.2rem;
   }
 
-  .dashboard-summary {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .options-row {
+  .nav-buttons {
+    gap: 10px;
     flex-wrap: wrap;
     justify-content: center;
   }
 
+  .nav-buttons button {
+    padding: 10px 16px;
+    font-size: 14px;
+  }
+
+  .content h2 {
+    font-size: 1.75rem;
+  }
+
+  .welcome-message {
+    font-size: 1rem;
+    padding: 0 10px;
+  }
+
+  .summary-card {
+    padding: 18px;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .summary-icon {
+    margin-right: 0;
+    margin-bottom: 12px;
+  }
+
+  .summary-icon img {
+    width: 56px;
+    height: auto;
+  }
+
   .dashboard-charts {
-    grid-template-columns: repeat(1, 1fr);
-  }
-}
-
-/* Medium devices (desktops, 768px and up) */
-@media (min-width: 768px) and (max-width: 991.98px) {
-  .dashboard-summary {
-    grid-template-columns: repeat(2, minmax(300px, 1fr));
+    grid-template-columns: 1fr;
+    gap: 24px;
   }
 
-  .dashboard-charts {
-    grid-template-columns: repeat(2, minmax(460px, 1fr));
+  .chart-container {
+    padding: 20px;
+    height: auto;
+    min-height: 360px;
+    overflow-x: auto;
   }
-}
 
-/* Large devices (large desktops, 992px and up) */
-@media (min-width: 992px) {
-  /* Your default styles mostly apply here, so no changes necessary */
+  .chart-container h3 {
+    font-size: 1.1rem;
+  }
+
+  .option img {
+    width: 120px;
+    height: 120px;
+  }
+
+  .option p {
+    font-size: 1rem;
+  }
+
+  .action-button {
+    width: 100px;
+    padding: 12px;
+  }
+
+  .action-button img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .quick-actions h3 {
+    font-size: 1.1rem;
+  }
 }
