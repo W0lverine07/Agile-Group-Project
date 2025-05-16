@@ -57,10 +57,8 @@
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
+    <li><a href="#Testing">Testing</a></li>
+    <li><a href="#Contributors">Contributors</a></li>
   </ol>
 </details>
 
@@ -109,36 +107,25 @@ This is an example of how to list things you need to use the software and how to
 ### Installation
 
 
-1. Clone the repository:
-   ```
-   git clone <repository-url>
-   cd wellness-tracker
-   ```
-
-2. Create and activate a virtual environment:
+1. Create and activate a virtual environment:
    ```
    python -m venv venv
    source venv/bin/activate  # On Windows, use: venv\Scripts\activate
    ```
 
-3. Install the required packages:
+2. Install the required packages:
    ```
    pip install -r requirements.txt
    ```
 
-4. Initialize the database:
-   ```
-   python -m app.db_helper
-   ```
-
-5. Run the application:
+3. Run the application:
    ```
    python run.py
    ```
 
-6. Access the application in your web browser:
+4. Access the application in your web browser:
    ```
-   http://localhost:5004
+   http://localhost:5002
    ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -179,12 +166,12 @@ This is an example of how to list things you need to use the software and how to
 
 ### Running Unit Tests
 ```
-python -m unittest discover tests/unit
+python -m pytest tests/test_unit.py -v
 ```
 
 ### Running Selenium Tests
 ```
-python -m unittest discover tests/selenium
+python -m tests.test_selenium
 ```
 
 <!-- CONTRIBUTING -->
