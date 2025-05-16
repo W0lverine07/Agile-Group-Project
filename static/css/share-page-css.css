@@ -605,3 +605,99 @@ header h1 {
     padding: 8px 12px;
   }
 }
+/* Responsive styles for phones and tablets */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem;
+  }
+
+  .left-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+
+  header h1 {
+    font-size: 20px;
+  }
+
+  .nav-buttons {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    margin-top: 10px;
+  }
+
+  .nav-buttons button {
+    margin: 5px 5px 0 0;
+    padding: 8px 14px;
+    font-size: 13px;
+  }
+
+  .dropbtn {
+    padding: 8px;
+    font-size: 14px;
+  }
+
+  .dropdown-content a {
+    padding: 10px 14px;
+  }
+
+  .content h2 {
+    font-size: 24px;
+  }
+
+  .share-container {
+    flex-direction: column;
+  }
+
+  .share-selection,
+  .share-options {
+    padding: 15px;
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .search-box input {
+    font-size: 14px;
+  }
+
+  .search-button {
+    font-size: 14px;
+  }
+
+  .tab-button {
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+
+  .item-details h4 {
+    font-size: 15px;
+  }
+
+  .item-details p,
+  .item-date {
+    font-size: 12px;
+  }
+
+  .message-box textarea {
+    height: 60px;
+    font-size: 14px;
+  }
+
+  .share-button {
+    font-size: 14px;
+    padding: 12px;
+  }
+
+  .shared-info h4 {
+    font-size: 14px;
+  }
+
+  .shared-item {
+    padding: 12px;
+  }
+}
