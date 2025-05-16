@@ -1,3 +1,4 @@
+/* Reset & Base Styles */
 * {
   margin: 0;
   padding: 0;
@@ -7,27 +8,15 @@
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background: #000;
-  color: #ffffff;
+  color: #fff;
   min-height: 100vh;
   overflow-x: hidden;
   position: relative;
+  line-height: 1.6;
 }
 
-/* Background setup */
-body::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url('https://static.vecteezy.com/system/resources/previews/049/508/425/non_2x/a-highquality-camera-captures-vibrant-scenes-in-a-modern-television-studio-filled-with-colorful-lights-and-a-dynamic-atmosphere-photo.jpg');
-  background-size: cover;
-  background-position: center;
-  opacity: 0.6;
-  z-index: -2;
-}
-
+/* Background Layered Design */
+body::before,
 body::after {
   content: "";
   position: fixed;
@@ -35,274 +24,238 @@ body::after {
   left: 0;
   width: 100%;
   height: 100%;
+  z-index: -2;
+}
+
+body::before {
+  background-image: url('https://static.vecteezy.com/system/resources/previews/049/508/425/non_2x/a-highquality-camera-captures-vibrant-scenes-in-a-modern-television-studio-filled-with-colorful-lights-and-a-dynamic-atmosphere-photo.jpg');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.5;
+}
+
+body::after {
   background: linear-gradient(135deg, rgba(0,0,0,0.9) 0%, rgba(40,40,40,0.8) 100%);
   z-index: -1;
 }
 
+/* Header */
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1.5rem 2rem;
-  position: relative;
-  z-index: 10;
-  background-color: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(10px);
-  box-shadow: 0 1px 15px rgba(0, 0, 0, 0.1);
   position: sticky;
   top: 0;
   z-index: 100;
-}
-
-header h1 {
-  font-size: 24px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 .left-header {
   display: flex;
   align-items: center;
-  gap: 10px; /* Optional spacing between logo and h1 */
+  gap: 12px;
+}
+
+.logo {
+  height: 48px;
+  width: auto;
+  border-radius: 8px;
 }
 
 .left-header h1 {
-  text-align: left;
+  font-size: 24px;
+  font-weight: 600;
+  color: #ffffff;
 }
 
-.video-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 3rem auto;
-    max-width: 960px;
-    padding: 1rem;
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(5px);
-    border-radius: 20px;
+/* Navigation Buttons */
+.nav-buttons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-iframe {
-    width: 100%;
-    max-width: 800px;
-    height: 450px;
-    border: none;
-    border-radius: 12px;
-}
-
-.nav-buttons button {
+.nav-buttons button,
+.dropbtn {
   background-color: #ff0000;
-  border: none;
   color: white;
-  padding: 10px 18px;
-  margin-left: 10px;
+  padding: 10px 16px;
+  border: none;
   font-size: 14px;
   border-radius: 6px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
-.nav-buttons button:hover {
+.nav-buttons button:hover,
+.dropbtn:hover {
   background-color: #16a085;
 }
 
+.logout-btn {
+  background-color: #333;
+}
+
+.logout-btn:hover {
+  background-color: #555;
+}
+
+/* Dropdown */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 110%;
+  left: 0;
+  background-color: rgba(255, 0, 0, 0.3);
+  min-width: 160px;
+  border-radius: 6px;
+  overflow: hidden;
+  z-index: 200;
+}
+
+.dropdown-content a {
+  color: white;
+  text-decoration: none;
+  padding: 10px 16px;
+  display: block;
+  transition: background 0.3s ease;
+}
+
+.dropdown-content a:hover {
+  background-color: #16a085;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Video Container */
+.video-container {
+  max-width: 960px;
+  margin: 3rem auto;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 16px;
+  backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+}
+
+iframe {
+  width: 100%;
+  height: 480px;
+  border-radius: 12px;
+  border: none;
+}
+
+/* Content Area */
 .content {
-  padding: 30px;
   max-width: 1000px;
   margin: auto;
+  padding: 2rem;
 }
 
-h2 {
-  margin-bottom: 10px;
-  color: #ffffff;
-}
-
-p {
-  margin: 10px 0;
-  line-height: 1.6;
-}
-
-.logo {
-  height: 50px;
-  width: auto;
-  border-radius: 8px;
-  margin-right: 15px;
-  vertical-align: middle;
-}
-
-.logo-link {
-  display: flex;
-  align-items: center;
-  margin-right: 15px;
-  text-decoration: none;
-}
-
+/* Equal-sized content blocks */
 .content-block {
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: stretch; /* key to equal height */
   justify-content: space-between;
-  margin: 40px 0;
-  padding: 20px;
-  background-color: rgba(0, 0, 0, 0.6);
-  border-radius: 60px;
-  gap: 30px;
   flex-wrap: wrap;
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 24px;
+  margin: 2rem 0;
+  padding: 2rem;
+  gap: 2rem;
+  min-height: 320px; /* optional: enforce a baseline height */
 }
 
+/* Reverse layout if needed */
 .content-block.reverse {
   flex-direction: row-reverse;
 }
 
-.content-block .text {
-  flex: 1 1 400px;
-  color: #ffffff;
-}
-
+/* Make both child areas fill equally and stretch */
+.content-block .text,
 .content-block .image {
-  flex: 1 1 200px;
+  flex: 1 1 50%;
   display: flex;
+  align-items: center;
   justify-content: center;
 }
 
+/* Inner text styling */
+.content-block .text {
+  padding: 1rem;
+  flex-direction: column;
+  text-align: left;
+}
+
+/* Image styling */
 .content-block .image img {
   max-width: 100%;
   height: auto;
-  max-height: 150px;
+  max-height: 200px;
   border-radius: 12px;
-  opacity: 0.9;
+  object-fit: contain;
 }
 
-.account-button-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 40px;
-  padding-bottom: 40px;
-}
 
-.gallery-heading {
+/* Section Headings */
+h2.gallery-heading {
   text-align: center;
-  color: #fff;
-  font-size: 1.8rem;
-  margin-top: 40px;
-  margin-bottom: 20px;
+  font-size: 2rem;
+  margin: 40px 0 20px;
   font-weight: bold;
+  color: #fff;
 }
 
-/* Gallery Section */
-.image-gallery {
+/* Image Gallery */
+.gallery {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 20px;
-  padding: 20px;
   max-width: 1200px;
+  padding: 0 1rem 3rem;
   margin: auto;
 }
 
-.image-gallery img {
+.gallery img {
   width: 100%;
   height: auto;
   border-radius: 12px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
   transition: transform 0.3s ease;
-}
-
-.image-gallery img:hover {
-  transform: scale(1.03);
-}
-
-.gallery {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 20px;
-  padding: 1rem;
-  justify-items: center;
-}
-
-.dropdown {
-    position: relative;
-    display: inline-block;
-}
-
-.dropbtn {
-    background-color: #333;
-    color: white;
-    padding: 10px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-    border-radius: 8px;
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: transparent;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
-    z-index: 1;
-    border-radius: 8px;
-    overflow: hidden;
-}
-
-.dropdown-content a {
-    color: white;
-    padding: 12px 16px;
-    display: block;
-    text-decoration: none;
-    background-color: rgba(255, 0, 0, 0.3); /* transparent red background */
-}
-
-.dropdown-content a:hover {
-    background-color: #16a085;
-}
-
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-
-.dropdown:hover .dropbtn {
-    background-color: #16a085;
-}
-
-
-.nav-buttons .logout-btn {
-  background-color: #333;
-}
-
-.nav-buttons .logout-btn:hover {
-  background-color: #555;
-}
-
-.gallery img {
-  width: 250px;
-  height: auto;
-  border-radius: 10px;
   cursor: pointer;
-  transition: transform 0.2s;
 }
 
 .gallery img:hover {
   transform: scale(1.05);
 }
 
+/* Lightbox */
 #lightbox {
+  display: none;
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: none; 
-  background: rgba(0, 0, 0, 0.9);
-  align-items: center;
-  justify-content: center;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.9);
   z-index: 1000;
+  justify-content: center;
+  align-items: center;
 }
 
 #lightbox img {
   max-width: 90%;
   max-height: 90%;
-  border-radius: 8px;
-  box-shadow: 0 0 25px rgba(255, 255, 255, 0.2);
-  transition: 0.3s ease-in-out;
   object-fit: contain;
+  border-radius: 10px;
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.2);
 }
+
