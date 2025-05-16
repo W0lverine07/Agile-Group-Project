@@ -3,6 +3,7 @@ from flask_migrate import Migrate
 from app.models import db
 import os
 from .db_init import populate_exercise_types
+from flask_wtf import CSRFProtect
 
 def create_app():
     app = Flask(__name__,
@@ -10,6 +11,7 @@ def create_app():
                 static_folder=os.path.join(os.path.dirname(os.path.dirname(__file__)), 'static'))
 
     app.secret_key = 'secretkey104'
+    csrf = CSRFProtect(app) #Enables CSRF protection
     
     BASE_DIR = os.path.abspath(os.path.dirname(__file__))
     DB_PATH = os.path.join(BASE_DIR, '..', 'instance', 'wellness.db')

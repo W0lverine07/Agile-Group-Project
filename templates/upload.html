@@ -39,7 +39,8 @@
     <h2>Record Your Activity</h2>
 
     <form action="{{ url_for('main.upload_data') }}" method="POST">
-        
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"> <!-- CSRF Token inclusion -->
+
         <div class="form-group">
             <label for="date">Date:</label>
             <input type="date" id="date" name="date" value="{{ today }}" required>

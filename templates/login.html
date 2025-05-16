@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="csrf-token" content="{{ csrf_token() }}"> <!-- CSRF Token inclusion -->
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FitTrack - Login/Register</title>
@@ -83,7 +85,10 @@
             <h1>Welcome Back</h1>
             <p class="subtitle">Continue your fitness journey</p>
 
-            <form action="{{ url_for('main.login') }}" method="POST"> <!-- since the entered password and username is checked using User.check_password() -->
+            <!-- added CSRF token protection -->
+            <form method="POST" action="{{ url_for('main.login') }}">
+                {{ form.csrf_token }}
+            <!-- end of change -->
                 <div class="input-group">
                     <div class="input-icon">
                         <i class="fas fa-user"></i>
@@ -113,8 +118,10 @@
         <div class="form-container hidden" id="register-form">
             <h1>Create Account</h1>
             <p class="subtitle">Start your fitness journey</p>
-
-            <form action="{{ url_for('main.register') }}" method="POST">
+            <!-- added CSRF token protection -->
+            <form method="POST" action="{{ url_for('main.register') }}">
+                {{ form.csrf_token }}
+            <!-- end of change -->
                 <div class="input-group">
                     <div class="input-icon">
                         <i class="fas fa-user"></i>
@@ -134,8 +141,7 @@
                     <div class="input-icon">
                         <i class="fas fa-check-circle"></i>
                     </div>
-                    <input type="password" name="confirm_password" id="confirm_password" placeholder="Confirm password"
-                           required>
+                    <input type="password" name="confirm_password" id="confirm_password" placeholder="Confirm password" required>
                 </div>
 
                 <div class="checkbox-container terms-checkbox">

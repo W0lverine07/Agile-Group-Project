@@ -26,15 +26,19 @@ window.showForgotPassword = function () {
 window.verifyForgotDetails = function () {
     const username = document.getElementById("forgot-username").value.trim();
     const email = document.getElementById("forgot-email").value.trim();
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content'); // CSRF token for security
+
 
     if (!username || !email) {
         alert("Please enter both username and email.");
         return;
     }
-
+    
     fetch("/verify_forgot", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json",
+                    "X-CSRFToken": csrfToken }, // include CSRF token
+
         body: JSON.stringify({ username, email })
     })
     .then(res => res.json())
@@ -54,6 +58,7 @@ window.resetPassword = function () {
     const username = document.getElementById("forgot-username").value.trim();
     const password = document.getElementById("new-password").value.trim();
     const confirm = document.getElementById("confirm-password").value.trim();
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content'); // CSRF token for security
 
     if (password.length < 6) {
         alert("Password must be at least 6 characters.");
@@ -66,7 +71,8 @@ window.resetPassword = function () {
 
     fetch("/reset_password", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json",
+                    "X-CSRFToken": csrfToken }, // include CSRF token
         body: JSON.stringify({ username, password })
     })
     .then(res => res.json())

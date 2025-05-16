@@ -152,6 +152,8 @@ function updateShareButton() {
 // === Share Now ===
 function shareNow() {
   const message = document.getElementById('share-message').value;
+  const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content'); // CSRF token for security
+
 
   selectedUsers.forEach(username => {
     const formData = new FormData();
@@ -159,6 +161,7 @@ function shareNow() {
     formData.append('content_type', selectedItem.type);
     formData.append('content_id', selectedItem.id);
     formData.append('message', message);
+    formData.append('csrf_token', csrfToken); // Include CSRF token
 
     fetch('/api/share_data', {
       method: 'POST',

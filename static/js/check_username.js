@@ -13,12 +13,17 @@ $(document).ready(function () {
                 feedback.text('Username must be at least 3 characters long.').css('color', 'red');
                 return;
             }
-
+            
+            const csrfToken = $('meta[name="csrf-token"]').attr('content'); //  include CSRF token for security
+            
             $.ajax({
                 url: '/check_username',
                 method: 'POST',
                 contentType: 'application/json',
                 data: JSON.stringify({ username: username }),
+                headers: {
+                    'X-CSRFToken': csrfToken
+                },
                 success: function (response) {
                     if (response.available) {
                         feedback.text('Username is available').css('color', 'lightgreen');
