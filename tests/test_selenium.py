@@ -40,7 +40,17 @@ class RegistrationTest(unittest.TestCase):
         cls.app = create_app()
         cls.app.config['TESTING'] = True
         cls.app.config['WTF_CSRF_ENABLED'] = False
-        
+        cls.app.config['WTF_CSRF_CHECK_DEFAULT'] = False
+
+        with cls.app.app_context():
+                try:
+                    # Disable CSRF protection for testing
+                    if hasattr(cls.app, 'extensions') and 'csrf' in cls.app.extensions:
+                        cls.app.extensions['csrf']._exempt_views = set()
+                        cls.app.extensions['csrf']._exempt_views.add('*')  # Exempt all views
+                except Exception as e:
+                    print(f"Disable CSRF protection error: {e}")
+
         # Start Flask server in a separate thread
         def run_flask_app():
             cls.app.run(host='localhost', port=cls.port, use_reloader=False, debug=False)
