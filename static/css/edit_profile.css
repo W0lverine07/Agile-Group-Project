@@ -1,103 +1,181 @@
-/* Form Container */
+
 .form-container {
-    margin: 30px auto;
-    background-color: rgba(67, 66, 66, 0.95);
-    border-radius: 20px;
-    padding: 40px 35px;
-    width: 100%;
+    margin: 40px auto;
+    background-color: rgba(30, 30, 30, 0.95);
+    border-radius: 24px;
+    padding: 48px 40px;
+    width: 90%;
     max-width: 650px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
-    color: #fff;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.7);
+    color: #f0f0f0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    animation: fadeInUp 0.6s ease forwards;
+    transition: box-shadow 0.3s ease;
+    user-select: none;
+}
+.form-container:hover {
+    box-shadow: 0 16px 50px rgba(0, 0, 0, 0.85);
 }
 
-/* Heading */
+/* =========================
+   Heading
+   ========================= */
 .form-container h2 {
-    font-size: 28px;
+    font-size: 2.1rem;
+    font-weight: 700;
+    color: #fafafa;
     text-align: center;
-    margin-bottom: 30px;
-    font-weight: 600;
-    color: #f5f5f5;
+    margin-bottom: 36px;
+    letter-spacing: 0.03em;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
 }
 
-/* Labels */
+/* =========================
+   Labels
+   ========================= */
 .form-group label {
-    font-size: 15px;
-    font-weight: 600;
-    color: #f4f1f1;
-    margin-bottom: 6px;
     display: block;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #ddd;
 }
 
-/* Input and Select styling */
+/* =========================
+   Inputs and Selects
+   ========================= */
 .custom-input,
 .custom-select {
     width: 100%;
-    padding: 12px 14px;
-    font-size: 15px;
-    border-radius: 10px;
-    border: 1px solid #444;
-    background-color: #1f1f1f;
-    color: #f0f0f0;
-    margin-bottom: 20px;
-    transition: border 0.2s ease, background-color 0.2s ease;
-}
-
-.custom-input:focus,
-.custom-select:focus {
-    border: 1px solid #68e5c8;
-    outline: none;
+    padding: 14px 18px;
+    font-size: 1rem;
+    border-radius: 12px;
+    border: 1.5px solid #555;
     background-color: #222;
+    color: #eee;
+    margin-bottom: 24px;
+    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.4);
+    transition: 
+        border-color 0.3s ease,
+        background-color 0.3s ease,
+        box-shadow 0.3s ease;
+    -webkit-appearance: none; /* Remove default arrow in selects on some browsers */
 }
 
 .custom-input::placeholder {
-    color: #aaaaaa;
+    color: #999;
+    font-style: italic;
 }
 
 .custom-select option {
     background-color: #111;
-    color: #fff;
+    color: #eee;
 }
 
-/* Submit Button */
+/* =========================
+   Hover effects on inputs/selects
+   ========================= */
+.custom-input:hover,
+.custom-select:hover {
+    border-color: #1abc9c;
+    background-color: #2a2a2a;
+    box-shadow: inset 0 3px 8px rgba(26, 188, 156, 0.4);
+    cursor: text;
+}
+
+/* =========================
+   Focus effects on inputs/selects
+   ========================= */
+.custom-input:focus,
+.custom-select:focus {
+    outline: none;
+    border-color: #16a085;
+    background-color: #272727;
+    box-shadow: 0 0 10px 3px rgba(22, 160, 133, 0.7);
+}
+
+/* =========================
+   Submit Button
+   ========================= */
 .submit-button {
-    background-color: #e74c3c;
-    color: #fff;
-    padding: 14px;
-    border-radius: 10px;
-    font-size: 16px;
-    font-weight: bold;
-    border: none;
     width: 100%;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    padding: 16px 0;
+    background: linear-gradient(45deg, #e74c3c, #c0392b);
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 14px;
+    box-shadow: 0 6px 15px rgba(231, 76, 60, 0.6);
+    transition: 
+        background 0.35s ease,
+        transform 0.2s ease,
+        box-shadow 0.3s ease;
+    cursor: pointer;
+    user-select: none;
 }
 
-.submit-button:hover {
-    background-color: #c0392b;
-    transform: translateY(-1px);
-    cursor: pointer;
+.submit-button:hover,
+.submit-button:focus {
+    background: linear-gradient(45deg, #c0392b, #992d22);
+    box-shadow: 0 8px 22px rgba(192, 57, 43, 0.85);
+    transform: translateY(-2px);
+    outline: none;
 }
-@media (max-width: 576px) {
+
+/* =========================
+   Responsive Adjustments
+   ========================= */
+@media (max-width: 768px) {
     .form-container {
-        padding: 25px 20px;
+        padding: 36px 28px;
+        width: 95%;
+    }
+    .form-container h2 {
+        font-size: 1.85rem;
+    }
+    .custom-input,
+    .custom-select {
+        padding: 12px 14px;
+        font-size: 0.95rem;
+        margin-bottom: 20px;
+    }
+    .submit-button {
+        padding: 14px 0;
+        font-size: 1rem;
     }
 }
-.form-container {
-    animation: fadeIn 0.6s ease-in-out;
+
+@media (max-width: 480px) {
+    .form-container {
+        padding: 28px 20px;
+    }
+    .form-container h2 {
+        font-size: 1.6rem;
+        margin-bottom: 28px;
+    }
+    .custom-input,
+    .custom-select {
+        font-size: 0.9rem;
+        padding: 10px 12px;
+        margin-bottom: 18px;
+    }
+    .submit-button {
+        padding: 12px 0;
+        font-size: 0.95rem;
+    }
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-/* Hover effect on input and select */
-.custom-input:hover,
-.custom-select:hover {
-    border: 1px solid #16a085;
-    background-color: #262626;
-    transition: background-color 0.2s ease, border 0.2s ease;
-}
-.custom-input:hover,
-.custom-select:hover {
-    cursor: text;
+/* =========================
+   Animations
+   ========================= */
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
