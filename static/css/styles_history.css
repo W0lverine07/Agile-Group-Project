@@ -181,3 +181,97 @@ header h1 {
   color: #e0e0e0;
   line-height: 1.75;
 }
+/* Responsive Styling */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem;
+  }
+
+  .left-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+
+  .left-header h1 {
+    font-size: 20px;
+  }
+
+  .logo {
+    height: 40px;
+    margin-right: 0;
+    margin-bottom: 5px;
+  }
+
+  .nav-buttons {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+  }
+
+  .nav-buttons button {
+    width: 100%;
+    margin: 6px 0;
+    font-size: 15px;
+    padding: 12px;
+  }
+
+  .dropbtn {
+    width: 100%;
+    padding: 12px;
+    font-size: 15px;
+  }
+
+  .dropdown-content {
+    width: 100%;
+  }
+
+  .dropdown-content a {
+    padding: 14px;
+    font-size: 15px;
+  }
+
+  .content {
+    margin: 30px 12px;
+    padding: 16px;
+  }
+
+  .content h2 {
+    font-size: 24px;
+  }
+
+  .content p {
+    font-size: 15px;
+    line-height: 1.6;
+  }
+}
+
+@media (max-width: 480px) {
+  .content {
+    padding: 14px;
+  }
+
+  .content h2 {
+    font-size: 22px;
+  }
+
+  .content p {
+    font-size: 14px;
+  }
+
+  header {
+    padding: 0.8rem;
+  }
+
+  .dropbtn, .nav-buttons button {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .dropdown-content a {
+    font-size: 14px;
+  }
+}
