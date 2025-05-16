@@ -794,3 +794,92 @@ tr:hover {
     font-size: 11px;
   }
 }
+@media (max-width: 1024px) {
+  .charts-container {
+    grid-template-columns: 1fr;
+  }
+
+  .filter-controls {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .table-controls {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 1rem;
+  }
+
+  .left-header h1 {
+    font-size: 20px;
+  }
+
+  .dropbtn {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .nav-buttons {
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+  }
+
+  .nav-buttons button {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .chart-wrapper {
+    height: 250px;
+  }
+
+  .table-search input {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .content h2 {
+    font-size: 24px;
+  }
+
+  .welcome-message {
+    font-size: 16px;
+  }
+
+  .progress-title,
+  .progress-value {
+    font-size: 14px;
+  }
+
+  .progress-value {
+    font-size: 20px;
+  }
+
+  .dropbtn {
+    font-size: 13px;
+    padding: 6px;
+  }
+
+  th, td {
+    padding: 10px;
+    font-size: 12px;
+  }
+
+  .table-control-btn {
+    padding: 6px 10px;
+    font-size: 13px;
+  }
+}
