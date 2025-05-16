@@ -107,29 +107,23 @@ This is an example of how to list things you need to use the software and how to
 ### Installation
 
 
-1. Clone the repository:
-   ```
-   git clone <repository-url>
-   cd wellness-tracker
-   ```
-
-2. Create and activate a virtual environment:
+1. Create and activate a virtual environment:
    ```
    python -m venv venv
    source venv/bin/activate  # On Windows, use: venv\Scripts\activate
    ```
 
-3. Install the required packages:
+2. Install the required packages:
    ```
    pip install -r requirements.txt
    ```
 
-4. Run the application:
+3. Run the application:
    ```
    python run.py
    ```
 
-5. Access the application in your web browser:
+4. Access the application in your web browser:
    ```
    http://localhost:5002
    ```
